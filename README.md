@@ -199,7 +199,7 @@ You will need to ssh into the AWS EC2 Instance you created above. This is a step
 cp ~/aws-eks-cluster-quickstart/kube-config/aws-auth-cm.yaml aws-auth-cm.yaml
 ```
 
-### Eedit aws-auth-cm.yaml
+### Edit aws-auth-cm.yaml
 Replace "<ARN of instance role (not instance profile)>" with NodeInstanceRole from output of CloudFormation script "eks-nodegroup"
 
 ### Test
