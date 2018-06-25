@@ -192,14 +192,22 @@ You should be able to see the additional nodes visible in AWS EC2 Console
 
 ## Enable Worker Nodes to Join Your Cluster
 
-curl -O https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/aws-auth-cm.yaml
+You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
 
-edit aws-auth-cm.yaml # replacing "<ARN of instance role (not instance profile)>" with NodeInstanceRole from output of CloudFormation script "eks-worker-nodes" 
+###  Get the aws-auth-cm.yaml template from the github project
+```
+cp ~/aws-eks-cluster-quickstart/kube-config/aws-auth-cm.yaml aws-auth-cm.yaml
+```
+
+### Eedit aws-auth-cm.yaml
+Replace "<ARN of instance role (not instance profile)>" with NodeInstanceRole from output of CloudFormation script "eks-nodegroup"
+
+# Test
+```
 kubectl apply -f aws-auth-cm.yaml
-
-kubectl get nodes --watch
-
-You should be able to see several nodes appear in "STATUS Ready" shortly
+kubectl get nodes
+```
+You should be able to see several nodes appear in "STATUS Ready"
 
 
 ## Deploy WebApp to Your Cluster
