@@ -143,7 +143,7 @@ git clone https://github.com/kskalvar/aws-eks-cluster-quickstart.git
 mkdir -p ~/.kube  
 cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig ~/.kube  
 cd ~/.kube  
-edit config-eks-cluster # replacing <cluster-name>, <endpoint-url>, and <base64-encoded-ca-cert> with information above  
+edit config-eks-cluster # replace ```<cluster-name> <endpoint-url> <base64-encoded-ca-cert>``` with information above  
 
 export KUBECONFIG=~/.kube/control-kubeconfig  
 
