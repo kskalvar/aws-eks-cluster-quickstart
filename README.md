@@ -135,11 +135,11 @@ Default region name [None]: us-east-1
 
 ### Create kubectl configuration file
 
-Gather information about the cluster for use below
+Gather cluster name, endpoint, and certificate for use below
 ```
-aws eks list-clusters                                                                  # copy cluster name  
-aws eks describe-cluster --name eks-cluster --query cluster.endpoint                   # copy endpoint  
-aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data # copy certificate  
+aws eks list-clusters                                                               
+aws eks describe-cluster --name eks-cluster --query cluster.endpoint                
+aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data  
 ```
 
 Get the github project so you'll have configuration templates available
@@ -147,12 +147,12 @@ Get the github project so you'll have configuration templates available
 git clone https://github.com/kskalvar/aws-eks-cluster-quickstart.git
 ```
 
-Create kubeconfig
+Create kubeconfig replacing <cluster-name> <endpoint-url> <base64-encoded-ca-cert> with information above
 ```
 mkdir -p ~/.kube  
 cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig ~/.kube  
 cd ~/.kube  
-edit control-kubeconfig # replace <cluster-name> <endpoint-url> <base64-encoded-ca-cert> with information above  
+edit control-kubeconfig   
 ```
 
 ### Test cluster
