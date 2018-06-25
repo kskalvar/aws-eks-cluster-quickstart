@@ -19,7 +19,7 @@ Steps:
 
 To make this first cluster easy to deploy we'll use a docker image located in DockerHub at kskalvar/web.  This image is nothing more than a simple webapp that returns the current ip address of the container it's running in.
 
-The project also includes the Dockerfile for those interested in the configuration of the actually application or to build your own and deploy using ECR.
+The project also includes the Dockerfile for those interested in the configuration of the actual application or to build your own and deploy using ECR.
 
 
 ## Create your Amazon EKS Service Role
