@@ -125,6 +125,7 @@ See contents of "/tmp/install-eks-support" it should say "installation complete"
 
 
 ### Configure awscli
+
 aws configure
 ```
 AWS Access Key ID []:
@@ -134,21 +135,32 @@ Default region name [None]: us-east-1
 
 ### Create kubectl configuration file
 
+Gather information about the cluster for use below
+```
 aws eks list-clusters                                                                  # copy cluster name  
 aws eks describe-cluster --name eks-cluster --query cluster.endpoint                   # copy endpoint  
 aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data # copy certificate  
+```
 
+Get the github project so you'll have configuration templates available
+```
 git clone https://github.com/kskalvar/aws-eks-cluster-quickstart.git
+```
 
+Create kubeconfig
+```
 mkdir -p ~/.kube  
 cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig ~/.kube  
 cd ~/.kube  
 edit control-kubeconfig # replace ```<cluster-name> <endpoint-url> <base64-encoded-ca-cert>``` with information above  
+```
 
 export KUBECONFIG=~/.kube/control-kubeconfig  
 
-kubectl get svc  # test 
-
+Test cluster
+```
+kubectl get svc 
+```
 
 ## Launch and Configure Amazon EKS Worker Nodes
 
