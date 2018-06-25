@@ -202,7 +202,7 @@ cp ~/aws-eks-cluster-quickstart/kube-config/aws-auth-cm.yaml aws-auth-cm.yaml
 ### Eedit aws-auth-cm.yaml
 Replace "<ARN of instance role (not instance profile)>" with NodeInstanceRole from output of CloudFormation script "eks-nodegroup"
 
-# Test
+### Test
 ```
 kubectl apply -f aws-auth-cm.yaml
 kubectl get nodes
@@ -212,32 +212,34 @@ You should be able to see several nodes appear in "STATUS Ready"
 
 ## Deploy WebApp to Your Cluster
 
-Create pod
+You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
+
+### Create pod
 ```
 kubectl run web --image=kskalvar/web --port=5000
 ```
 
-Scale pod
+### Scale pod
 ```
 kubectl scale deployment web --replicas=3
 ```
 
-Show pods running
+### Show pods running
 ```
 kubectl get pods --output wide
 ```
 
-Create load balancer
+### Create load balancer
 ```
 kubectl expose deployment web --port=80 --target-port=5000 --type="LoadBalancer"
 ```
 
-Get aws external load balancer external address
+### Get AWS External Load Balancer Address
 ```
 kubectl get service web --output wide
 ```
 
-### test from browser
+### Test from browser using "External Load Balancer Address" from above 
 
 ### kill application
 kubectl delete deployment,service web
