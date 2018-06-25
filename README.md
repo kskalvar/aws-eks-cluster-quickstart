@@ -235,13 +235,14 @@ kubectl expose deployment web --port=80 --target-port=5000 --type="LoadBalancer"
 ```
 
 ### Get AWS External Load Balancer Address
+Capture EXTERNAL-IP for use below
 ```
 kubectl get service web --output wide
 ```
 
-### Test from browser using "External Load Balancer Address" from above
+### Test from browser
 ```
-Using your client-side browser goto: http://<External Load Balancer Address>
+Using your client-side browser goto: http://<EXTERNAL-IP>
 ```
 
 ### Delete Deployment, Service
