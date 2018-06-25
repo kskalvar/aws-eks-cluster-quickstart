@@ -204,20 +204,30 @@ You should be able to see several nodes appear in "STATUS Ready" shortly
 
 ## Deploy WebApp to Your Cluster
 
-### create pod
+Create pod
+```
 kubectl run web --image=kskalvar/web --port=5000
+```
 
-#### scale pod
+Scale pod
+```
 kubectl scale deployment web --replicas=3
+```
 
-#### show pods running
+Show pods running
+```
 kubectl get pods --output wide
+```
 
-### create load balancer
+Create load balancer
+```
 kubectl expose deployment web --port=80 --target-port=5000 --type="LoadBalancer"
+```
 
-### get aws external load balancer external address
+Get aws external load balancer external address
+```
 kubectl get service web --output wide
+```
 
 ### test from browser
 
