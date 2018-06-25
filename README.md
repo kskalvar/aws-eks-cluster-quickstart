@@ -252,14 +252,16 @@ kubectl delete deployment,service web
 
 ## Remove AWS EKS Cluster
 
-### AWS CloudFormation, delete eks-nodegroup Stack
+### AWS CloudFormation, delete "eks-nodegroup" Stack
 
-### AWS EKS, delete eks-cluster
+### AWS EKS, delete "eks-cluster"
 Wait for cluster to be deleted before proceeding
 
-### AWS CloudFormation, delete eks-vpc
+### AWS CloudFormation, delete "eks-vpc"
 
-### AWS EC2, delete kubectl Instance
+### AWS EC2, delete "kubectl" Instance
+
+### AWS IAM Roles, delete AWSServiceRoleForAutoScaling AWSServiceRoleForElasticLoadBalancing eks-role eks-nodegroup-NodeInstanceRole-*
 
 
 ## References
