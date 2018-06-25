@@ -13,7 +13,7 @@ write_files:
         yum -y install git    
         
         echo "upgrade awscli" >> /tmp/install-eks-support
-        pip install awscli --upgrade --user
+        pip install awscli --upgrade
  
         echo "installing kubectl" >> /tmp/install-eks-support
 
