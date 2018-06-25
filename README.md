@@ -230,6 +230,7 @@ You will need to ssh into the AWS EC2 Instance you created above. This is a step
 
 ### Create pod
 ```
+export KUBECONFIG=~/.kube/control-kubeconfig 
 kubectl run web --image=kskalvar/web --port=5000
 ```
 
