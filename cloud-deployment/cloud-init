@@ -9,6 +9,9 @@ write_files:
         echo "upgrade os" >> /tmp/install-eks-support
         yum -y update
         
+        echo "installing git" >> /tmp/install-eks-support
+        yum -y install git    
+        
         echo "upgrade awscli" >> /tmp/install-eks-support
         pip install awscli --upgrade --user
  
@@ -26,8 +29,10 @@ write_files:
         
         echo "installing docker" >> /tmp/install-eks-support
 
-        yum -y install docker  
-
+        yum install -y docker
+        service docker start
+        usermod -a -G docker ec2-user
+        
         echo "installation complete. See /var/log/cloud-init-output.log" >> /tmp/install-eks-support
 
     path: /tmp/start.sh
