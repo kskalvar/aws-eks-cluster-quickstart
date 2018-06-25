@@ -214,50 +214,48 @@ You should be able to see several nodes appear in "STATUS Ready"
 
 You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
 
-Create pod
+### Create pod
 ```
 kubectl run web --image=kskalvar/web --port=5000
 ```
 
-Scale pod
+### Scale pod
 ```
 kubectl scale deployment web --replicas=3
 ```
 
-Show pods running
+### Show pods running
 ```
 kubectl get pods --output wide
 ```
 
-Create load balancer
+### Create load balancer
 ```
 kubectl expose deployment web --port=80 --target-port=5000 --type="LoadBalancer"
 ```
 
-Get AWS External Load Balancer Address
+### Get AWS External Load Balancer Address
 ```
 kubectl get service web --output wide
 ```
 
-Test from browser using "External Load Balancer Address" from above 
+### Test from browser using "External Load Balancer Address" from above 
 
-Kill Application
+### Kill Application
 ```
 kubectl delete deployment,service web
 ```
 
 ## Remove AWS EKS Cluster
 
-### AWS CloudFormation Delete eks-worker-nodes Stack
+### AWS CloudFormation, delete eks-nodegroup Stack
 
-### AWS EKS Delete eks-cluster
+### AWS EKS, delete eks-cluster
 Wait for cluster to be deleted before proceeding
 
-### AWS CloudFormation Delete eks-cluster-vpc
+### AWS CloudFormation, delete eks-vpc
 
-### AWS EC2 Delete kubectl Instance
-
-
+### AWS EC2, delete kubectl Instance
 
 
 ## References
