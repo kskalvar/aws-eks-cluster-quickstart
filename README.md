@@ -143,7 +143,7 @@ git clone https://github.com/kskalvar/aws-eks-cluster-quickstart.git
 mkdir -p ~/.kube  
 cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig ~/.kube  
 cd ~/.kube  
-edit config-eks-cluster # replace ```<cluster-name> <endpoint-url> <base64-encoded-ca-cert>``` with information above  
+edit control-kubeconfig # replace ```<cluster-name> <endpoint-url> <base64-encoded-ca-cert>``` with information above  
 
 export KUBECONFIG=~/.kube/control-kubeconfig  
 
@@ -162,17 +162,17 @@ https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/amazon-eks-nodeg
 ```
 Click on "Next"  
 ```
-Stack Name: eks-worker-nodes
+Stack Name: eks-nodegroup
 ClusterNamme: eks-cluster
-ClusterControlPlaneSecurityGroup: eks-cluster-*-ControlPlaneSecurityGroup-*
-NodeGroupName: eks-cluster-nodes
+ClusterControlPlaneSecurityGroup: eks-vpc-ControlPlaneSecurityGroup-*
+NodeGroupName: eks-nodegroup
 NodeImageId: ami-dea4d5a1
 KeyName: <Your AWS KeyName>
-VpcId: eks-cluster
+VpcId: eks-vpc-VPC
 Subnets: Subnet01, Subnet02, Subnet03
 ```
 Click on "Next"  
-Click on "Next"
+Click on "Next"  
 Select Check Box "I acknowledge that AWS CloudFormation might create IAM resources"
 Click on "Create"
 
