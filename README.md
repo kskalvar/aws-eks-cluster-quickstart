@@ -72,7 +72,7 @@ Click on "Create"
 
 Wait for Status ACTIVE before proceeding
 
-## Configure AWS EC2 Instance
+## Configure Your AWS EC2 Instance
 
 Use the AWS Console to configure the EC2 Instance for kubectl.  This is a step by step process.
 
@@ -115,7 +115,7 @@ Review and Launch
 Click on "Launch"
 
 
-## Configure kubectl on EC2 Instance
+## Configure kubectl on Your EC2 Instance
 
 You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
 
@@ -161,7 +161,7 @@ export KUBECONFIG=~/.kube/control-kubeconfig
 kubectl get svc 
 ```
 
-## Launch and Configure Amazon EKS Worker Nodes
+## Launch and Configure Your Amazon EKS Worker Nodes
 
 Use the AWS CloudFormation to configure the Worker Nodes.  This is a step by step process.
 
@@ -250,7 +250,7 @@ Using your client-side browser goto: http://<EXTERNAL-IP>
 kubectl delete deployment,service web
 ```
 
-## Remove AWS EKS Cluster
+## Remove Your AWS EKS Cluster
 
 ### AWS CloudFormation
 Delete "eks-nodegroup" Stack
