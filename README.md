@@ -1,9 +1,11 @@
 AWS Elastic Kubernetes Service (EKS) QuickStart  
 ===============================================
 
-This solution shows how to create a AWS EKS Cluster and deploy a simple web application with an external Load Balancer. This readme updates an article "Getting Started with Amazon EKS" referenced below and provides a more basic step by step process.
+This solution shows how to create an AWS EKS Cluster and deploy a simple web application with an external Load Balancer. This readme updates an article "Getting Started with Amazon EKS" referenced below and provides a more basic step by step process.
 
-First we'll build an EC2 Instance and configure it to run kubectl for managing the Kubernetes Cluster.  Will then configure an IAM Role Kubernetes can assume to create AWS Resources such as an Elastic Load Balancer.  Will also be using AWS Cloud Formation to create the cluster VPC which will create subnets across 3 AWS Availability Zones (AZ).  
+First we'll build an EC2 Instance and configure it to run kubectl for managing the Kubernetes Cluster.  Will then configure an IAM Role Kubernetes can assume to create AWS Resources such as an Elastic Load Balancer.  Will also be using AWS Cloud Formation to create the cluster VPC which will create subnets across 3 AWS Availability Zones (AZ). 
+
+To make this first cluster easy to deploy we'll use a docker image located in DockerHub at kskalvar/web.  This image is nothing more than a simple webapp that returns the current ip address of the container it's running in.       
 
 
 ## Create your Amazon EKS Service Role
@@ -49,7 +51,7 @@ Click on "Create"
 Wait for Status CREATE_COMPLETE before proceeding 
 
 
-## Install and Configure kubectl for Amazon EKS
+## Install and Configure kubectl Instance for Amazon EKS
 
 Use the AWS Console to configure the EC2 Instance for processing map data.  This is a step by step process.
 
@@ -179,6 +181,43 @@ kubectl apply -f aws-auth-cm.yaml
 kubectl get nodes --watch
 
 You should be able to see several nodes appear in "STATUS Ready" shortly
+
+
+## Deploy WebApp to Your Cluster
+
+### create pod
+kubectl run web --image=kskalvar/web --port=5000
+
+#### scale pod
+kubectl scale deployment web --replicas=3
+
+#### show pods running
+kubectl get pods --output wide
+
+### create load balancer
+kubectl expose deployment web --port=80 --target-port=5000 --type="LoadBalancer"
+
+### get aws external load balancer external address
+kubectl get service web --output wide
+
+### test from browser
+
+### kill application
+kubectl delete deployment,service web
+
+
+## Remove AWS EKS Cluster
+
+### AWS CloudFormation Delete eks-worker-nodes Stack
+
+### AWS EKS Delete eks-cluster
+Wait for cluster to be deleted before proceeding
+
+### AWS CloudFormation Delete eks-cluster-vpc
+
+### AWS EC2 Delete kubectl Instance
+
+
 
 
 ## References
