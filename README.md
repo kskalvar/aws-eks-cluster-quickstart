@@ -42,7 +42,7 @@ https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/amazon-eks-vpc-s
 ```
 Click on "Next"  
 ```
-Stack Name: eks-cluster
+Stack Name: eks-vpc
 ```
 Click on "Next"  
 Click on "Next"
@@ -50,6 +50,27 @@ Click on "Create"
 
 Wait for Status CREATE_COMPLETE before proceeding 
 
+
+## Create your Amazon EKS Cluster
+
+Use the AWS Console to configure the EKS Cluster.  This is a step by step process.
+
+### AWS EKS Dashboard
+Click on "Clusters"  
+
+Click on "Create cluster"  
+```
+Cluster name: eks-cluster
+Kubernetes version:  1.10
+Role ARN: eks-role
+VPC: eks-vpc-VPC
+Subnets:  Should preselect all available
+Security groups: eks-vpc-ControlPlaneSecurityGroup-*
+```
+
+Click on "Create"  
+
+Wait for Status ACTIVE before proceeding
 
 ## Install and Configure kubectl Instance for Amazon EKS
 
@@ -95,27 +116,6 @@ Select "default"
 Review  
 Click on "Launch"
 
-
-## Create your Amazon EKS Cluster
-
-Use the AWS Console to configure the EKS Cluster.  This is a step by step process.
-
-### AWS EKS Dashboard
-Click on "Clusters"  
-
-Click on "Create cluster"  
-```
-Cluster name: eks-cluster
-Kubernetes version:  1.10
-Role ARN: eks-role
-VPC: eks-cluster-*-VPC
-Subnets:  Should preselect all available
-Security groups: eks-cluster-*-ControlPlaneSecurityGroup-*
-```
-
-Click on "Create"  
-
-Wait for Status ACTIVE before proceeding
 
 ## Configure kubectl for Amazon EKS
 
