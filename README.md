@@ -3,9 +3,23 @@ AWS Elastic Kubernetes Service (EKS) QuickStart
 
 This solution shows how to create an AWS EKS Cluster and deploy a simple web application with an external Load Balancer. This readme updates an article "Getting Started with Amazon EKS" referenced below and provides a more basic step by step process.
 
-First we'll build an EC2 Instance and configure it to run kubectl for managing the Kubernetes Cluster.  Will then configure an IAM Role Kubernetes can assume to create AWS Resources such as an Elastic Load Balancer.  Will also be using AWS Cloud Formation to create the cluster VPC which will create subnets across 3 AWS Availability Zones (AZ). 
+Unfornately this is a pretty manual effort right now.
 
-To make this first cluster easy to deploy we'll use a docker image located in DockerHub at kskalvar/web.  This image is nothing more than a simple webapp that returns the current ip address of the container it's running in.       
+Steps:  
+  Create your Amazon EKS Service Role  
+  Create your Amazon EKS Cluster VPC  
+  Create your Amazon EKS Cluster  
+  Configure Your AWS EC2 Instance  
+  Configure kubectl on Your EC2 Instance  
+  Launch and Configure Your Amazon EKS Worker Nodes  
+  Enable Worker Nodes to Join Your Cluster  
+  Deploy WebApp to Your Cluster  
+  Remove Your AWS EKS Cluster  
+
+
+To make this first cluster easy to deploy we'll use a docker image located in DockerHub at kskalvar/web.  This image is nothing more than a simple webapp that returns the current ip address of the container it's running in.
+
+The project also includes the Dockerfile for those interested in the configuration of the actually application or to build your own and deploy using ECR.
 
 
 ## Create your Amazon EKS Service Role
