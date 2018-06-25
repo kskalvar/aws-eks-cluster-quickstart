@@ -152,13 +152,12 @@ Create kubeconfig
 mkdir -p ~/.kube  
 cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig ~/.kube  
 cd ~/.kube  
-edit control-kubeconfig # replace ```<cluster-name> <endpoint-url> <base64-encoded-ca-cert>``` with information above  
+edit control-kubeconfig # replace <cluster-name> <endpoint-url> <base64-encoded-ca-cert> with information above  
 ```
-
-export KUBECONFIG=~/.kube/control-kubeconfig  
 
 Test cluster
 ```
+export KUBECONFIG=~/.kube/control-kubeconfig 
 kubectl get svc 
 ```
 
@@ -185,7 +184,7 @@ Subnets: Subnet01, Subnet02, Subnet03
 ```
 Click on "Next"  
 Click on "Next"  
-Select Check Box "I acknowledge that AWS CloudFormation might create IAM resources"
+Select Check Box "I acknowledge that AWS CloudFormation might create IAM resources"  
 Click on "Create"
 
 Wait for Status CREATE_COMPLETE before proceeding  
