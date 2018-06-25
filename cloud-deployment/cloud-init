@@ -1,0 +1,37 @@
+#cloud-config
+
+write_files:
+  - content: |
+        #!/bin/sh
+
+        echo "installation start" > /tmp/install-eks-support
+        
+        echo "upgrade os" >> /tmp/install-eks-support
+        yum -y update
+        
+        echo "upgrade awscli" >> /tmp/install-eks-support
+        pip install awscli --upgrade --user
+ 
+        echo "installing kubectl" >> /tmp/install-eks-support
+
+        curl -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/bin/linux/amd64/kubectl
+        chmod 777 kubectl
+        cp kubectl /usr/local/bin
+ 
+        echo "installing heptio-authenticator-aws" >> /tmp/install-eks-support
+
+        curl -o heptio-authenticator-aws https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/bin/linux/amd64/heptio-authenticator-aws
+        chmod 777 heptio-authenticator-aws
+        cp heptio-authenticator-aws /usr/local/bin
+        
+        echo "installing docker" >> /tmp/install-eks-support
+
+        yum -y install docker  
+
+        echo "installation complete. See /var/log/cloud-init-output.log" >> /tmp/install-eks-support
+
+    path: /tmp/start.sh
+    permissions: 0755
+
+runcmd:
+  - /tmp/start.sh
