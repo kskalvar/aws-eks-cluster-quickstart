@@ -72,9 +72,9 @@ Click on "Create"
 
 Wait for Status ACTIVE before proceeding
 
-## Install and Configure kubectl Instance for Amazon EKS
+## Configure AWS EC2 Instance
 
-Use the AWS Console to configure the EC2 Instance for processing map data.  This is a step by step process.
+Use the AWS Console to configure the EC2 Instance for kubectl.  This is a step by step process.
 
 ### AWS EC2 Dashboard
 
@@ -115,7 +115,9 @@ Review and Launch
 Click on "Launch"
 
 
-## Configure kubectl for Amazon EKS
+## Configure kubectl on EC2 Instance
+
+You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
 
 ### Check to insure cloud-init has completed
 
@@ -127,13 +129,14 @@ aws configure
 ```
 AWS Access Key ID []:
 AWS Secret Access Key []:
+Default region name [None]: us-east-1
 ```
 
 ### Create kubectl configuration file
 
-aws eks list-clusters                                                                  # copy and paste cluster name  
-aws eks describe-cluster --name eks-cluster --query cluster.endpoint                   # copy and paste endpoint  
-aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data # copy and paste certificate  
+aws eks list-clusters                                                                  # copy cluster name  
+aws eks describe-cluster --name eks-cluster --query cluster.endpoint                   # copy endpoint  
+aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data # copy certificate  
 
 
 mkdir -p ~/.kube
