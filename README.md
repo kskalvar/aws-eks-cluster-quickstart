@@ -138,15 +138,16 @@ aws eks list-clusters                                                           
 aws eks describe-cluster --name eks-cluster --query cluster.endpoint                   # copy endpoint  
 aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data # copy certificate  
 
+git clone https://github.com/kskalvar/aws-eks-cluster-quickstart.git
 
-mkdir -p ~/.kube
-cd ~/.kube
-create/edit config-eks-cluster # see project/kube-config/kubeconfig for template, replace cluster name, endpoint, and certificate from commands above
+mkdir -p ~/.kube  
+cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig ~/.kube  
+cd ~/.kube  
+edit config-eks-cluster # replacing <cluster-name>, <endpoint-url>, and <base64-encoded-ca-cert> with information above  
 
+export KUBECONFIG=~/.kube/control-kubeconfig  
 
-export KUBECONFIG=~/.kube/config-eks-cluster
-
-
+kubectl get svc  # test 
 
 
 ## Launch and Configure Amazon EKS Worker Nodes
