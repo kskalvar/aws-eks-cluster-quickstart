@@ -77,9 +77,7 @@ Wait for Status ACTIVE before proceeding
 Use the AWS Console to configure the EC2 Instance for processing map data.  This is a step by step process.
 
 ### AWS EC2 Dashboard
-Select Instances
 
-#### Instances
 Click on "Launch Instance"
 
 Choose AMI
@@ -113,7 +111,7 @@ Configure Security Group
 Select "Select an existing security group"  
 Select "default"
 
-Review  
+Review and Launch  
 Click on "Launch"
 
 
@@ -124,23 +122,29 @@ Click on "Launch"
 See contents of "/tmp/install-eks-support" it should say "installation complete".
 
 
+### Configure awscli
 aws configure
 ```
 AWS Access Key ID []:
 AWS Secret Access Key []:
 ```
 
-aws eks list-clusters                                                                  # copy and paste cluster name
-aws eks describe-cluster --name eks-cluster --query cluster.endpoint                   # copy and paste endpoint
-aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data # copy and paste certificate
+### Create kubectl configuration file
+
+aws eks list-clusters                                                                  # copy and paste cluster name  
+aws eks describe-cluster --name eks-cluster --query cluster.endpoint                   # copy and paste endpoint  
+aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data # copy and paste certificate  
 
 
 mkdir -p ~/.kube
 cd ~/.kube
-create/edit config-eks-cluster # see project/kube-config/kubeconfig for template replacing cluster name, endpoint, and certificate from commands above
+create/edit config-eks-cluster # see project/kube-config/kubeconfig for template, replace cluster name, endpoint, and certificate from commands above
 
 
 export KUBECONFIG=~/.kube/config-eks-cluster
+
+
+
 
 ## Launch and Configure Amazon EKS Worker Nodes
 
