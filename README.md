@@ -155,7 +155,7 @@ cd ~/.kube
 edit control-kubeconfig # replace <cluster-name> <endpoint-url> <base64-encoded-ca-cert> with information above  
 ```
 
-Test cluster
+### Test cluster
 ```
 export KUBECONFIG=~/.kube/control-kubeconfig 
 kubectl get svc 
