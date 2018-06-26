@@ -169,7 +169,7 @@ cd ~/.kube
 edit control-kubeconfig   
 ```
 
-### Test cluster
+### Test Cluster
 ```
 export KUBECONFIG=~/.kube/control-kubeconfig 
 kubectl get svc 
