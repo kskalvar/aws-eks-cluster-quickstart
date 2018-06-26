@@ -17,7 +17,7 @@ Steps:
   Remove Your AWS EKS Cluster  
 
 
-To make this first cluster easy to deploy we'll use a docker image located in DockerHub at kskalvar/web.  This image is nothing more than a simple webapp that returns the current ip address of the container it's running in.
+To make this first cluster easy to deploy we'll use a docker image located in DockerHub at kskalvar/web.  This image is nothing more than a simple webapp that returns the current ip address of the container it's running in.  We'll create an external AWS Load Balancer and you should see a unique ip address as it is load balanced across containers.
 
 The project also includes the Dockerfile for those interested in the configuration of the actual application or to build your own and deploy using ECR.
 
@@ -228,23 +228,23 @@ You should be able to see several nodes appear in "STATUS Ready"
 
 You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
 
-### Create pod
+### Create Pod
 ```
 export KUBECONFIG=~/.kube/control-kubeconfig 
 kubectl run web --image=kskalvar/web --port=5000
 ```
 
-### Scale pod
+### Scale Pod
 ```
 kubectl scale deployment web --replicas=3
 ```
 
-### Show pods running
+### Show Pods Running
 ```
 kubectl get pods --output wide
 ```
 
-### Create load balancer
+### Create Load Balancer
 ```
 kubectl expose deployment web --port=80 --target-port=5000 --type="LoadBalancer"
 ```
