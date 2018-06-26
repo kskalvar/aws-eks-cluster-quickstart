@@ -88,7 +88,7 @@ Wait for Status ACTIVE before proceeding
 
 ## Configure Your AWS EC2 Instance
 
-Use the AWS Console to configure the EC2 Instance for kubectl.  This is a step by step process.
+Use AWS Console to configure the EC2 Instance for kubectl.  This is a step by step process.
 
 ### AWS EC2 Dashboard
 
@@ -177,7 +177,7 @@ kubectl get svc
 
 ## Launch and Configure Your Amazon EKS Worker Nodes
 
-Use the AWS CloudFormation to configure the Worker Nodes.  This is a step by step process.
+Use AWS CloudFormation to configure the Worker Nodes.  This is a step by step process.
 
 ### AWS CloudFormation Console
 Click on "Create Stack"  
