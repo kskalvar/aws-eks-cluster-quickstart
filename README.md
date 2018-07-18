@@ -3,7 +3,7 @@ AWS Elastic Kubernetes Service (EKS) QuickStart
 
 This solution shows how to create an AWS EKS Cluster and deploy a simple web application with an external Load Balancer. This readme updates an article "Getting Started with Amazon EKS" referenced below and provides a more basic step by step process.
 
-Unfornately this is a pretty manual effort right now.
+Unfortunately this is a pretty manual effort right now.
 
 Steps:  
   Create your Amazon EKS Service Role  
