@@ -254,6 +254,7 @@ kubectl scale deployment web --replicas=3
 ```
 kubectl get pods --output wide
 ```
+Wait till you see all pods appear in "STATUS Running"
 
 ### Create Load Balancer
 ```
