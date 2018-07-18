@@ -300,7 +300,6 @@ Delete the following Roles:
 AWSServiceRoleForAutoScaling  
 AWSServiceRoleForElasticLoadBalancing  
 eks-role  
-eks-nodegroup-NodeInstanceRole-*
 ```
 ## References
 Getting Started with Amazon EKS  
