@@ -232,7 +232,7 @@ Replace "<ARN of instance role (not instance profile)>" with NodeInstanceRole fr
 kubectl apply -f aws-auth-cm.yaml
 kubectl get nodes
 ```
-You should be able to see several nodes appear in "STATUS Ready"
+Wait till you see all nodes appear in "STATUS Ready"
 
 
 ## Deploy WebApp to Your Cluster
