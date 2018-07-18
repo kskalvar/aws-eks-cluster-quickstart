@@ -294,13 +294,14 @@ Delete "eks-vpc"
 Delete "kubectl-console" Instance
 
 ### AWS IAM Roles
-Delete the following Roles:  
-       AWSServiceRoleForAutoScaling  
-       AWSServiceRoleForElasticLoadBalancing  
-       eks-role  
-       eks-nodegroup-NodeInstanceRole-*
+Delete the following Roles:
 
-
+```
+AWSServiceRoleForAutoScaling  
+AWSServiceRoleForElasticLoadBalancing  
+eks-role  
+eks-nodegroup-NodeInstanceRole-*
+```
 ## References
 Getting Started with Amazon EKS  
 https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html
