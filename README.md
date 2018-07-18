@@ -118,7 +118,11 @@ Next
 Add Storage  
 Next
 
-Add Tags  
+Add Tags
+```
+Name kubectl-console
+```
+
 Next
 
 Configure Security Group  
