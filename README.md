@@ -266,6 +266,7 @@ Capture EXTERNAL-IP for use below
 ```
 kubectl get service web --output wide
 ```
+Wait till you see "EXTERNAL-IP *.<your account>.<region>.elb.amazon.com" 
 
 ### Test from browser
 ```
