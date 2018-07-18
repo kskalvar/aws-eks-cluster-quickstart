@@ -281,7 +281,11 @@ Delete "eks-vpc"
 Delete "kubectl" Instance
 
 ### AWS IAM Roles
-Delete AWSServiceRoleForAutoScaling AWSServiceRoleForElasticLoadBalancing eks-role eks-nodegroup-NodeInstanceRole-*
+Delete the following Roles:  
+       AWSServiceRoleForAutoScaling  
+       AWSServiceRoleForElasticLoadBalancing  
+       eks-role  
+       eks-nodegroup-NodeInstanceRole-*
 
 
 ## References
