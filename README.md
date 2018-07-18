@@ -170,7 +170,12 @@ Create kubeconfig replacing <cluster-name> <endpoint-url> <base64-encoded-ca-cer
 mkdir -p ~/.kube  
 cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig ~/.kube  
 cd ~/.kube  
-edit control-kubeconfig   
+edit control-kubeconfig
+
+<endpoint-url>
+<base64-encoded-ca-cert>
+<cluster-name>
+  
 ```
 
 ### Test Cluster
