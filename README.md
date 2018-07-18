@@ -146,8 +146,8 @@ See contents of "/tmp/install-eks-support" it should say "installation complete"
 
 aws configure
 ```
-AWS Access Key ID []:
-AWS Secret Access Key []:
+AWS Access Key ID []: <Your Access Key ID>
+AWS Secret Access Key []: <Your Secret Access Key>
 Default region name [None]: us-east-1
 ```
 
