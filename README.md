@@ -282,7 +282,7 @@ Wait for cluster to be deleted before proceeding
 Delete "eks-vpc"
 
 ### AWS EC2
-Delete "kubectl" Instance
+Delete "kubectl-console" Instance
 
 ### AWS IAM Roles
 Delete the following Roles:  
