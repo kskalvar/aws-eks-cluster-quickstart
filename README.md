@@ -59,7 +59,7 @@ Click on "Next"
 Stack Name: eks-vpc
 ```
 Click on "Next"  
-Click on "Next"
+Click on "Next"  
 Click on "Create"
 
 Wait for Status CREATE_COMPLETE before proceeding 
