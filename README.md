@@ -51,10 +51,10 @@ Use the AWS Console to add EC2 Full Access so you can provision EC2 Load Balance
 Select Roles  
 
 Click on "eks-role"  
-Click on "Attach policies"
-Enter "EC2FullAccess" in "Filter policies"
-Select "AmazonEC2FullAccess"
-Click on "Attach Policy"
+Click on "Attach policies"  
+Enter "EC2FullAccess" in "Filter policies"  
+Select "AmazonEC2FullAccess"  
+Click on "Attach Policy"  
 
 
 ## Create your Amazon EKS Cluster VPC
