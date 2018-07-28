@@ -304,6 +304,7 @@ Wait for cluster to be deleted before proceeding, pretty slow?  Really slow!
 
 ### AWS CloudFormation
 Delete "eks-vpc"  
+Wait for "eks-vpc" to be deleted before proceeding
 
 ### AWS EC2
 Delete "kubectl-console" Instance
