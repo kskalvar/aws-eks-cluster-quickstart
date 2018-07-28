@@ -299,7 +299,7 @@ Delete "eks-nodegroup" Stack
 Wait for "eks-nodegroup" to be deleted before proceeding
 
 ### AWS EKS
-Delete "eks-cluster"
+Delete "eks-cluster"  
 Wait for cluster to be deleted before proceeding, pretty slow?  Really slow!  
 
 ### AWS CloudFormation
