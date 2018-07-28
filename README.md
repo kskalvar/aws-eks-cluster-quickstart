@@ -294,14 +294,15 @@ kubectl delete deployment,service web
 ## Remove Your AWS EKS Cluster
 
 ### AWS CloudFormation
-Delete "eks-nodegroup" Stack
+Delete "eks-nodegroup" Stack  
+Wait for "eks-nodegroup" to be deleted before proceeding
 
 ### AWS EKS
 Delete "eks-cluster"
-Wait for cluster to be deleted before proceeding
+Wait for cluster to be deleted before proceeding, pretty slow?  Really slow!  
 
 ### AWS CloudFormation
-Delete "eks-vpc"
+Delete "eks-vpc"  
 
 ### AWS EC2
 Delete "kubectl-console" Instance
