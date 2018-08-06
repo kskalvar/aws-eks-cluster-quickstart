@@ -110,7 +110,7 @@ Click on "Launch Instance"
 
 Choose AMI
 ```
-Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type (ami-14c5486b)
+ami-14c5486b
 ```  
 Click on "Select"
 
