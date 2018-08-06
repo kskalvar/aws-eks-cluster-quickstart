@@ -104,11 +104,13 @@ Wait for Status ACTIVE before proceeding
 
 Use AWS Console to configure the EC2 Instance for kubectl.  This is a step by step process.
 
-### AWS EC2 Dashboard
+### AWS EC2 Dashboard  
 
 Click on "Launch Instance"
 
-Choose AMI
+Click on "Community AMIs"  
+
+Search community AMIs
 ```
 ami-14c5486b
 ```  
