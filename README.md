@@ -120,7 +120,7 @@ Choose Instance Type
 ```
 t2.micro
 ```
-Click on "Next"
+Click on "Next: Configure Instance Details"
 
 Configure Instance  
 Click on "Advanced Details
@@ -129,23 +129,22 @@ User data
 Select "As file"
 Click on "Choose File" and Select "cloud-init" from project cloud-deployment directory 
 ```  
-Next
+Click on "Next: Add Storage"
 
-Add Storage  
-Next
+Click on "Next" Add Tags"  
 
 Add Tags
 ```
 Name kubectl-console
 ```
 
-Next
+Click on "Next: Configure Security Group"  
 
 Configure Security Group  
 Select "Select an existing security group"  
 Select "default"
 
-Review and Launch  
+Click on "Review and Launch"    
 Click on "Launch"
 
 
