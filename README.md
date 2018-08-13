@@ -172,7 +172,7 @@ You will need to ssh into the AWS EC2 Instance you created above. This is a step
 See contents of "/tmp/install-eks-support" it should say "installation complete".
 
 
-### Configure awscli
+### Configure AWS CLI
 
 aws configure
 ```
@@ -181,7 +181,11 @@ AWS Secret Access Key []: <Your Secret Access Key>
 Default region name [None]: us-east-1
 ```
 
-### Create kubectl configuration file
+### Create kubectl configuration files
+
+NOTE:  There is a script in /home/ec2-user called configure-kube-control.  You may run this script to automate the  
+       population of environment variables in .kube/aws-auth-cm.yaml and .kube/control-kubeconfig.  Be sure to verify  
+       the values.  
 
 Gather cluster name, endpoint, and certificate for use below
 ```
