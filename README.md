@@ -9,7 +9,7 @@ Steps:
   Create your Amazon EKS Service Role  
   Create your Amazon EKS Cluster VPC  
   Create your Amazon EKS Cluster  
-  Launch and Configure Your Amazon EKS Worker Nodes
+  Launch and Configure Your Amazon EKS Worker Nodes  
   Configure Your AWS EC2 Instance  
   Configure kubectl on Your EC2 Instance  
   Enable Worker Nodes to Join Your Cluster  
