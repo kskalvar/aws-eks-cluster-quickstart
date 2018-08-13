@@ -44,20 +44,6 @@ eks-role
 ```
 Click on "Create role"
 
-## Add Amazon EC2 Full Access to Service Role
-
-Use the AWS Console to add EC2 Full Access so you can provision EC2 Load Balancers from kubectl
-
-### AWS IAM Dashboard
-Select Roles  
-
-Click on "eks-role"  
-Click on "Attach policies"  
-Enter "EC2FullAccess" in "Filter policies"  
-Select "AmazonEC2FullAccess"  
-Click on "Attach Policy"  
-
-
 ## Create your Amazon EKS Cluster VPC
 
 Use the AWS CloudFormation to configure the Cluster VPC.  This is a step by step process.
@@ -212,9 +198,9 @@ git clone https://github.com/kskalvar/aws-eks-cluster-quickstart.git
 Create kubeconfig replacing <cluster-name> <endpoint-url> <base64-encoded-ca-cert> with information above
 ```
 mkdir -p ~/.kube  
-cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig ~/.kube  
+cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig.txt ~/.kube/control-kubeconfig 
 cd ~/.kube  
-edit control-kubeconfig
+edit control-kubeconfig and replace with values above
 
 <endpoint-url>
 <base64-encoded-ca-cert>
@@ -224,7 +210,6 @@ edit control-kubeconfig
 
 ### Test Cluster
 ```
-export KUBECONFIG=~/.kube/control-kubeconfig 
 kubectl get svc 
 ```
 
@@ -234,7 +219,7 @@ You will need to ssh into the AWS EC2 Instance you created above. This is a step
 
 ###  Get the aws-auth-cm.yaml template from the github project
 ```
-cp ~/aws-eks-cluster-quickstart/kube-config/aws-auth-cm.yaml aws-auth-cm.yaml
+cp ~/aws-eks-cluster-quickstart/kube-config/aws-auth-cm.yaml.txt ~/.kube/aws-auth-cm.yaml
 ```
 
 ### Edit aws-auth-cm.yaml
@@ -244,7 +229,7 @@ Replace "<ARN of instance role (not instance profile)>" with NodeInstanceRole fr
 
 ### Test Cluster Nodes
 ```
-kubectl apply -f aws-auth-cm.yaml
+kubectl apply -f ~/.kube/aws-auth-cm.yaml
 kubectl get nodes
 ```
 Wait till you see all nodes appear in "STATUS Ready"
@@ -256,7 +241,6 @@ You will need to ssh into the AWS EC2 Instance you created above. This is a step
 
 ### Create Pod
 ```
-export KUBECONFIG=~/.kube/control-kubeconfig 
 kubectl run web --image=kskalvar/web --port=5000
 ```
 
