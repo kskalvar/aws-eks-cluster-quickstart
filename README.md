@@ -7,7 +7,6 @@ Unfortunately this is a pretty manual effort right now.
 
 Steps:  
   Create your Amazon EKS Service Role  
-  Add Amazon EC2 Full Access to Service Role  
   Create your Amazon EKS Cluster VPC  
   Create your Amazon EKS Cluster  
   Launch and Configure Your Amazon EKS Worker Nodes
