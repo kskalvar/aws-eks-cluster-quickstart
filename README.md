@@ -314,8 +314,6 @@ Delete "kubectl-console" Instance
 Delete the following Roles:
 
 ```
-AWSServiceRoleForAutoScaling  
-AWSServiceRoleForElasticLoadBalancing  
 eks-role  
 ```
 ## References
