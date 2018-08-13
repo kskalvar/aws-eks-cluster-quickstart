@@ -7,10 +7,9 @@ Unfortunately this is a pretty manual effort right now.
 
 Steps:  
   Create your Amazon EKS Service Role  
-  Add Amazon EC2 Full Access to Service Role  
   Create your Amazon EKS Cluster VPC  
   Create your Amazon EKS Cluster  
-  Launch and Configure Your Amazon EKS Worker Nodes
+  Launch and Configure Your Amazon EKS Worker Nodes  
   Configure Your AWS EC2 Instance  
   Configure kubectl on Your EC2 Instance  
   Enable Worker Nodes to Join Your Cluster  
@@ -172,7 +171,7 @@ You will need to ssh into the AWS EC2 Instance you created above. This is a step
 See contents of "/tmp/install-eks-support" it should say "installation complete".
 
 
-### Configure awscli
+### Configure AWS CLI
 
 aws configure
 ```
@@ -181,18 +180,17 @@ AWS Secret Access Key []: <Your Secret Access Key>
 Default region name [None]: us-east-1
 ```
 
-### Create kubectl configuration file
+### Create kubectl configuration files
+
+NOTE:  There is a script in /home/ec2-user called configure-kube-control.  You may run this script to automate the  
+       population of environment variables in .kube/aws-auth-cm.yaml and .kube/control-kubeconfig.  Be sure to verify  
+       the values.  
 
 Gather cluster name, endpoint, and certificate for use below
 ```
 aws eks list-clusters                                                               
 aws eks describe-cluster --name eks-cluster --query cluster.endpoint                
 aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data  
-```
-
-Get the github project so you'll have configuration templates available
-```
-git clone https://github.com/kskalvar/aws-eks-cluster-quickstart.git
 ```
 
 Create kubeconfig replacing <cluster-name> <endpoint-url> <base64-encoded-ca-cert> with information above
@@ -202,9 +200,9 @@ cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig.txt ~/.kube/contr
 cd ~/.kube  
 edit control-kubeconfig and replace with values above
 
-<endpoint-url>
-<base64-encoded-ca-cert>
-<cluster-name>
+<myendpoint>
+<mydata>
+<mycluster>
   
 ```
 
@@ -224,7 +222,7 @@ cp ~/aws-eks-cluster-quickstart/kube-config/aws-auth-cm.yaml.txt ~/.kube/aws-aut
 
 ### Edit aws-auth-cm.yaml
 ```
-Replace "<ARN of instance role (not instance profile)>" with NodeInstanceRole from output of CloudFormation script "eks-nodegroup"
+Replace <myarn> with NodeInstanceRole from output of CloudFormation script "eks-nodegroup"
 ```
 
 ### Test Cluster Nodes
