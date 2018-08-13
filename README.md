@@ -10,9 +10,9 @@ Steps:
   Add Amazon EC2 Full Access to Service Role  
   Create your Amazon EKS Cluster VPC  
   Create your Amazon EKS Cluster  
+  Launch and Configure Your Amazon EKS Worker Nodes
   Configure Your AWS EC2 Instance  
   Configure kubectl on Your EC2 Instance  
-  Launch and Configure Your Amazon EKS Worker Nodes  
   Enable Worker Nodes to Join Your Cluster  
   Deploy WebApp to Your Cluster  
   Remove Your AWS EKS Cluster  
