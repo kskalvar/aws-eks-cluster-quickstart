@@ -9,7 +9,7 @@ write_files:
         echo "upgrade os" >> /tmp/install-eks-support
         yum -y update
         
-        echo "installing git" >> /tmp/install-eks-support
+        echo "install git" >> /tmp/install-eks-support
         yum -y install git    
         
         echo "upgrade awscli" >> /tmp/install-eks-support
@@ -40,6 +40,10 @@ write_files:
 
         echo "aws-auth-cm.yaml" >> /tmp/install-eks-support
         runuser -l ec2-user -c 'cp ~/aws-eks-cluster-quickstart/kube-config/aws-auth-cm.yaml.txt ~/.kube'
+        
+        echo "install configure-kube-control script" >> /tmp/install-eks-support
+        runuser -l ec2-user -c 'cp ~/aws-eks-cluster-quickstart/scripts/configure-kube-control ~'
+        runuser -l ec2-user -c 'chmod 777 configure-kube-control'
 
         echo "set AWS Region us-east-1" >> /tmp/install-eks-support
         runuser -l ec2-user -c 'echo "export AWS_DEFAULT_REGION=us-east-1" >> ~/.bashrc'

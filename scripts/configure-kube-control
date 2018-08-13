@@ -1,6 +1,13 @@
-export cluster=`aws eks list-clusters --output text --query clusters`
-export endpoint=`aws eks describe-cluster --name eks-cluster --query cluster.endpoint`
-export data=`aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data`
+# This is a stupid script. If you have more than 1 cluster it will fail. If you have an arn with a different name it will fail.
+# Use at your own risk. But if you followed the installation instructions to the letter it should make the config process fast.
+
+# This will use aws cli to populate .kube/control-kubeconfig and .kube/aws-auth-cm.yaml with the correct parameters
+
+cluster=`aws eks list-clusters --output text --query clusters`
+endpoint=`aws eks describe-cluster --name eks-cluster --query cluster.endpoint`
+data=`aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data`
+arn=`aws iam list-roles  --query Roles[].[Arn] --output text | grep eks-nodegroup-NodeInstanceRole`
 
 cd $HOME/.kube
 sed "s|myendpoint|${endpoint}|;s|mydata|${data}|;s|mycluster|${cluster}|" control-kubeconfig.txt > control-kubeconfig
+sed "s|myarn|${arn}|" aws-auth-cm.yaml.txt > aws-auth-cm.yaml
