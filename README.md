@@ -193,11 +193,6 @@ aws eks describe-cluster --name eks-cluster --query cluster.endpoint
 aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data  
 ```
 
-Get the github project so you'll have configuration templates available
-```
-git clone https://github.com/kskalvar/aws-eks-cluster-quickstart.git
-```
-
 Create kubeconfig replacing <cluster-name> <endpoint-url> <base64-encoded-ca-cert> with information above
 ```
 mkdir -p ~/.kube  
