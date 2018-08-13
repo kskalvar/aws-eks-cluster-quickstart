@@ -100,6 +100,35 @@ Click on "Create"
 
 Wait for Status ACTIVE before proceeding
 
+## Launch and Configure Your Amazon EKS Worker Nodes
+
+Use AWS CloudFormation to configure the Worker Nodes.  This is a step by step process.
+
+### AWS CloudFormation Console
+Click on "Create Stack"  
+Select "Specify an Amazon S3 template URL"  
+```
+https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/amazon-eks-nodegroup.yaml
+```
+Click on "Next"  
+```
+Stack Name: eks-nodegroup
+ClusterNamme: eks-cluster
+ClusterControlPlaneSecurityGroup: eks-vpc-ControlPlaneSecurityGroup-*
+NodeGroupName: eks-nodegroup
+NodeImageId: ami-0fef2bff3c2e2da93
+KeyName: <Your AWS KeyName>
+VpcId: eks-vpc-VPC
+Subnets: Subnet01, Subnet02, Subnet03
+```
+Click on "Next"  
+Click on "Next"  
+Select Check Box "I acknowledge that AWS CloudFormation might create IAM resources"  
+Click on "Create"
+
+Wait for Status CREATE_COMPLETE before proceeding  
+You should be able to see the additional nodes visible in AWS EC2 Console
+
 ## Configure Your AWS EC2 Instance
 
 Use AWS Console to configure the EC2 Instance for kubectl.  This is a step by step process.
@@ -198,35 +227,6 @@ edit control-kubeconfig
 export KUBECONFIG=~/.kube/control-kubeconfig 
 kubectl get svc 
 ```
-
-## Launch and Configure Your Amazon EKS Worker Nodes
-
-Use AWS CloudFormation to configure the Worker Nodes.  This is a step by step process.
-
-### AWS CloudFormation Console
-Click on "Create Stack"  
-Select "Specify an Amazon S3 template URL"  
-```
-https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/amazon-eks-nodegroup.yaml
-```
-Click on "Next"  
-```
-Stack Name: eks-nodegroup
-ClusterNamme: eks-cluster
-ClusterControlPlaneSecurityGroup: eks-vpc-ControlPlaneSecurityGroup-*
-NodeGroupName: eks-nodegroup
-NodeImageId: ami-0fef2bff3c2e2da93
-KeyName: <Your AWS KeyName>
-VpcId: eks-vpc-VPC
-Subnets: Subnet01, Subnet02, Subnet03
-```
-Click on "Next"  
-Click on "Next"  
-Select Check Box "I acknowledge that AWS CloudFormation might create IAM resources"  
-Click on "Create"
-
-Wait for Status CREATE_COMPLETE before proceeding  
-You should be able to see the additional nodes visible in AWS EC2 Console
 
 ## Enable Worker Nodes to Join Your Cluster
 
