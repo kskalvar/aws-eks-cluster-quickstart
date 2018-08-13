@@ -200,9 +200,9 @@ cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig.txt ~/.kube/contr
 cd ~/.kube  
 edit control-kubeconfig and replace with values above
 
-<endpoint-url>
-<base64-encoded-ca-cert>
-<cluster-name>
+<myendpoint>
+<mydata>
+<mycluster>
   
 ```
 
@@ -222,7 +222,7 @@ cp ~/aws-eks-cluster-quickstart/kube-config/aws-auth-cm.yaml.txt ~/.kube/aws-aut
 
 ### Edit aws-auth-cm.yaml
 ```
-Replace "<ARN of instance role (not instance profile)>" with NodeInstanceRole from output of CloudFormation script "eks-nodegroup"
+Replace <myarn> with NodeInstanceRole from output of CloudFormation script "eks-nodegroup"
 ```
 
 ### Test Cluster Nodes
