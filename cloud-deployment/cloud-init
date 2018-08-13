@@ -32,7 +32,21 @@ write_files:
         yum install -y docker
         service docker start
         usermod -a -G docker ec2-user
+
+        echo "installing git repo" >> /tmp/install-eks-support
+        runuser -l ec2-user -c 'git clone https://github.com/kskalvar/aws-eks-cluster-quickstart.git'
         
+        echo "create control-kubeconfig" >> /tmp/install-eks-support
+        runuser -l ec2-user -c 'mkdir -p ~/.kube'  
+        runuser -l ec2-user -c 'cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig.txt ~/.kube' 
+        runuser -l ec2-user -c 'echo "export KUBECONFIG=~/.kube/control-kubeconfig" >> ~/.bashrc'
+
+        echo "create aws-auth-cm.yaml" >> /tmp/install-eks-support
+        runuser -l ec2-user -c 'cp ~/aws-eks-cluster-quickstart/kube-config/aws-auth-cm.yaml.txt ~/.kube'
+
+        echo "set AWS Region us-east-1" >> /tmp/install-eks-support
+        runuser -l ec2-user -c 'echo "export AWS_DEFAULT_REGION=us-east-1" >> ~/.bashrc'
+
         echo "installation complete. See /var/log/cloud-init-output.log" >> /tmp/install-eks-support
 
     path: /tmp/start.sh

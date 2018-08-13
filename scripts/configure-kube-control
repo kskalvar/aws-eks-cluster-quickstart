@@ -1,0 +1,6 @@
+export cluster=`aws eks list-clusters --output text --query clusters`
+export endpoint=`aws eks describe-cluster --name eks-cluster --query cluster.endpoint`
+export data=`aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data`
+
+cd $HOME/.kube
+sed "s|myendpoint|${endpoint}|;s|mydata|${data}|;s|mycluster|${cluster}|" control-kubeconfig.txt > control-kubeconfig
