@@ -112,7 +112,12 @@ Select Check Box "I acknowledge that AWS CloudFormation might create IAM resourc
 Click on "Create"
 
 Wait for Status CREATE_COMPLETE before proceeding  
-You should be able to see the additional nodes visible in AWS EC2 Console
+You should be able to see the additional nodes visible in AWS EC2 Console  
+
+Click on "Outputs" Tab Below
+```
+Copy NodeInstanceRole Value for use later
+```
 
 ## Configure Your AWS EC2 Instance
 
@@ -121,9 +126,7 @@ Use AWS Console to configure the EC2 Instance for kubectl.  This is a step by st
 ### AWS EC2 Dashboard  
 
 Click on "Launch Instance"
-
 Click on "Community AMIs"  
-
 Search community AMIs
 ```
 ami-14c5486b
@@ -144,27 +147,26 @@ Select "As file"
 Click on "Choose File" and Select "cloud-init" from project cloud-deployment directory 
 ```  
 Click on "Next: Add Storage"
-
 Click on "Next" Add Tags"  
-
 Add Tags
 ```
 Name kubectl-console
 ```
-
 Click on "Next: Configure Security Group"  
-
 Configure Security Group  
 Select "Select an existing security group"  
 Select "default"
-
 Click on "Review and Launch"    
 Click on "Launch"
 
-
 ## Configure kubectl on Your EC2 Instance
 
-You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
+You will need to ssh into the AWS EC2 Instance you created above.  
+This is a step by step process.
+
+NOTE:  There is a script in /home/ec2-user called configure-kube-control.  You may run this script to automate the  
+       creation and population of environment variables in .kube/aws-auth-cm.yaml and .kube/control-kubeconfig.  Be sure to verify  
+       the values.  Run "aws configure" first as it uses the cli to query for the cluster values.
 
 ### Check to insure cloud-init has completed
 
@@ -177,15 +179,10 @@ aws configure
 ```
 AWS Access Key ID []: <Your Access Key ID>
 AWS Secret Access Key []: <Your Secret Access Key>
-Default region name [None]: us-east-1
+Default region name []: us-east-1
 ```
 
-### Create kubectl configuration files
-
-NOTE:  There is a script in /home/ec2-user called configure-kube-control.  You may run this script to automate the  
-       population of environment variables in .kube/aws-auth-cm.yaml and .kube/control-kubeconfig.  Be sure to verify  
-       the values.  
-
+### control-kubeconfig
 Gather cluster name, endpoint, and certificate for use below
 ```
 aws eks list-clusters                                                               
@@ -193,39 +190,43 @@ aws eks describe-cluster --name eks-cluster --query cluster.endpoint
 aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data  
 ```
 
-Create kubeconfig replacing <cluster-name> <endpoint-url> <base64-encoded-ca-cert> with information above
+### control-kubeconfig
+Copy the control-kubeconfig template from the github project
 ```
 mkdir -p ~/.kube  
 cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig.txt ~/.kube/control-kubeconfig 
-cd ~/.kube  
-edit control-kubeconfig and replace with values above
 
+### Edit control-kubeconfig
+edit control-kubeconfig and replace with values above
+```
 <myendpoint>
 <mydata>
 <mycluster>
-  
 ```
 
 ### Test Cluster
+Using kubectl test the cluster status
 ```
 kubectl get svc 
 ```
 
 ## Enable Worker Nodes to Join Your Cluster
-
 You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
 
-###  Get the aws-auth-cm.yaml template from the github project
+###  aws-auth-cm.yaml
+Copy the aws-auth-cm.yaml template from the github project
 ```
 cp ~/aws-eks-cluster-quickstart/kube-config/aws-auth-cm.yaml.txt ~/.kube/aws-auth-cm.yaml
 ```
 
 ### Edit aws-auth-cm.yaml
-```
 Replace <myarn> with NodeInstanceRole from output of CloudFormation script "eks-nodegroup"
+```
+<myarn>
 ```
 
 ### Test Cluster Nodes
+Use kubectl to test status of cluster nodes
 ```
 kubectl apply -f ~/.kube/aws-auth-cm.yaml
 kubectl get nodes
@@ -238,22 +239,26 @@ Wait till you see all nodes appear in "STATUS Ready"
 You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
 
 ### Create Pod
+Use kubectl to create a single pod
 ```
 kubectl run web --image=kskalvar/web --port=5000
 ```
 
 ### Scale Pod
+Use kubectl to scale pod
 ```
 kubectl scale deployment web --replicas=3
 ```
 
 ### Show Pods Running
+Use kubectl to display pods
 ```
 kubectl get pods --output wide
 ```
 Wait till you see all pods appear in "STATUS Running"
 
 ### Create Load Balancer
+Use kubectl to create AWS EC2 LoadBalancer
 ```
 kubectl expose deployment web --port=80 --target-port=5000 --type="LoadBalancer"
 ```
@@ -266,11 +271,13 @@ kubectl get service web --output wide
 Wait till you see "EXTERNAL-IP ```*.<your account>.<region>.elb.amazon.com```" 
 
 ### Test from browser
+Using your client-side browser enter the following URL
 ```
-Using your client-side browser goto: http://<EXTERNAL-IP>
+http://<EXTERNAL-IP>
 ```
 
 ### Delete Deployment, Service
+Use kubectl to delete application
 ```
 kubectl delete deployment,service web
 ```
