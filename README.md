@@ -125,7 +125,7 @@ Use AWS Console to configure the EC2 Instance for kubectl.  This is a step by st
 
 ### AWS EC2 Dashboard  
 
-Click on "Launch Instance"
+Click on "Launch Instance"  
 Click on "Community AMIs"  
 Search community AMIs
 ```
