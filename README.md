@@ -101,7 +101,7 @@ Stack Name: eks-nodegroup
 ClusterNamme: eks-cluster
 ClusterControlPlaneSecurityGroup: eks-vpc-ControlPlaneSecurityGroup-*
 NodeGroupName: eks-nodegroup
-NodeImageId: ami-0fef2bff3c2e2da93
+NodeImageId: ami-058bfb8c236caae89
 KeyName: <Your AWS KeyName>
 VpcId: eks-vpc-VPC
 Subnets: Subnet01, Subnet02, Subnet03
