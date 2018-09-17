@@ -51,7 +51,7 @@ Use the AWS CloudFormation to configure the Cluster VPC.  This is a step by step
 Click on "Create Stack"  
 Select "Specify an Amazon S3 template URL"  
 ```
-https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/amazon-eks-vpc-sample.yaml
+https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2018-08-30/amazon-eks-vpc-sample.yaml
 ```
 Click on "Next"  
 ```
