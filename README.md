@@ -125,7 +125,7 @@ Use AWS Console to configure the EC2 Instance for kubectl.  This is a step by st
 
 ### AWS EC2 Dashboard  
 
-Click on "Launch Instance"
+Click on "Launch Instance"  
 Click on "Community AMIs"  
 Search community AMIs
 ```
@@ -137,16 +137,14 @@ Choose Instance Type
 ```
 t2.micro
 ```
-Click on "Next: Configure Instance Details"
-
-Configure Instance  
+Click on "Next: Configure Instance Details"  
 Click on "Advanced Details
 ```
 User data
 Select "As file"
 Click on "Choose File" and Select "cloud-init" from project cloud-deployment directory 
 ```  
-Click on "Next: Add Storage"
+Click on "Next: Add Storage"  
 Click on "Next" Add Tags"  
 Add Tags
 ```
@@ -155,7 +153,7 @@ Name kubectl-console
 Click on "Next: Configure Security Group"  
 Configure Security Group  
 Select "Select an existing security group"  
-Select "default"
+Select "default"  
 Click on "Review and Launch"    
 Click on "Launch"
 
