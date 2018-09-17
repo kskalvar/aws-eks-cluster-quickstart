@@ -21,7 +21,7 @@ write_files:
         cp kubectl /usr/local/bin
         kubectl version --short --client
  
-        echo "install heptio-authenticator-aws" >> /tmp/install-eks-support
+        echo "install aws-iam-authenticator" >> /tmp/install-eks-support
         curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator
         chmod 777 aws-iam-authenticator
         cp aws-iam-authenticator /usr/local/bin
