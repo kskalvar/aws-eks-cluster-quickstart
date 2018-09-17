@@ -155,7 +155,7 @@ Name kubectl-console
 Click on "Next: Configure Security Group"  
 Configure Security Group  
 Select "Select an existing security group"  
-Select "default"
+Select "default"  
 Click on "Review and Launch"    
 Click on "Launch"
 
