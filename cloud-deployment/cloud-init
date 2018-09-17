@@ -16,14 +16,16 @@ write_files:
         pip install awscli --upgrade
  
         echo "install kubectl" >> /tmp/install-eks-support
-        curl -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/bin/linux/amd64/kubectl
+        curl -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/kubectl
         chmod 777 kubectl
         cp kubectl /usr/local/bin
+        kubectl version --short --client
  
         echo "install heptio-authenticator-aws" >> /tmp/install-eks-support
-        curl -o heptio-authenticator-aws https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/bin/linux/amd64/heptio-authenticator-aws
-        chmod 777 heptio-authenticator-aws
-        cp heptio-authenticator-aws /usr/local/bin
+        curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator
+        chmod 777 aws-iam-authenticator
+        cp aws-iam-authenticator /usr/local/bin
+        aws-iam-authenticator help
         
         echo "install docker" >> /tmp/install-eks-support
         yum install -y docker
