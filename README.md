@@ -137,9 +137,7 @@ Choose Instance Type
 ```
 t2.micro
 ```
-Click on "Next: Configure Instance Details"
-
-Configure Instance  
+Click on "Next: Configure Instance Details"  
 Click on "Advanced Details
 ```
 User data
