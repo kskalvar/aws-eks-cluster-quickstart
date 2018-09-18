@@ -7,6 +7,7 @@ Unfortunately this is a pretty manual effort right now.
 
 Steps:  
   Create your Amazon EKS Service Role  
+  Add Amazon EC2 Full Access to Service Role  
   Create your Amazon EKS Cluster VPC  
   Create your Amazon EKS Cluster  
   Launch and Configure Your Amazon EKS Worker Nodes  
@@ -103,7 +104,7 @@ Use AWS CloudFormation to configure the Worker Nodes.  This is a step by step pr
 ### Enable EKS-optimized AMI with GPU Support
 You must subscribe to use this AMI
 ```
-https://aws.amazon.com/marketplace/pp?sku=58kec53jbhfbaqpgzivdyhdo9
+https://aws.amazon.com/marketplace/library/
 ```
 
 ### AWS CloudFormation Console
@@ -146,7 +147,7 @@ Click on "Launch Instance"
 Click on "Community AMIs"  
 Search community AMIs
 ```
-ami-058bfb8c236caae89
+ami-0ff8a91507f77f867
 ```  
 Click on "Select"
 
@@ -222,6 +223,7 @@ edit control-kubeconfig and replace with values above
 ### Test Cluster
 Using kubectl test the cluster status
 ```
+source ~/.bashrc # To insure you picked up the environment variables
 kubectl get svc 
 ```
 
