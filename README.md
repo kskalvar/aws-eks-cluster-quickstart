@@ -104,7 +104,7 @@ Use AWS CloudFormation to configure the Worker Nodes.  This is a step by step pr
 ### Enable EKS-optimized AMI with GPU Support
 You must subscribe to use this AMI
 ```
-https://aws.amazon.com/marketplace/pp?sku=58kec53jbhfbaqpgzivdyhdo9
+https://aws.amazon.com/marketplace/library/
 ```
 
 ### AWS CloudFormation Console
