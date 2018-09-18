@@ -147,7 +147,7 @@ Click on "Launch Instance"
 Click on "Community AMIs"  
 Search community AMIs
 ```
-ami-058bfb8c236caae89
+ami-0ff8a91507f77f867
 ```  
 Click on "Select"
 
