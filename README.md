@@ -89,6 +89,12 @@ Wait for Status ACTIVE before proceeding
 
 Use AWS CloudFormation to configure the Worker Nodes.  This is a step by step process.
 
+### Enable EKS-optimized AMI with GPU Support
+You must subscribe to use this AMI
+```
+https://aws.amazon.com/marketplace/pp?sku=58kec53jbhfbaqpgzivdyhdo9
+```
+
 ### AWS CloudFormation Console
 Click on "Create Stack"  
 Select "Specify an Amazon S3 template URL"  
@@ -206,11 +212,6 @@ edit control-kubeconfig and replace with values above
 Using kubectl test the cluster status
 ```
 kubectl get svc 
-```
-## EKS-optimized AMI with GPU Support
-You must subscribe to use this AMI
-```
-https://aws.amazon.com/marketplace/pp?sku=58kec53jbhfbaqpgzivdyhdo9
 ```
 
 ## Enable Worker Nodes to Join Your Cluster
