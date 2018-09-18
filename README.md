@@ -223,6 +223,7 @@ edit control-kubeconfig and replace with values above
 ### Test Cluster
 Using kubectl test the cluster status
 ```
+bash # To insure you picked up the environment variables
 kubectl get svc 
 ```
 
