@@ -207,6 +207,11 @@ Using kubectl test the cluster status
 ```
 kubectl get svc 
 ```
+## EKS-optimized AMI with GPU Support
+You must subscribe to use this AMI
+```
+https://aws.amazon.com/marketplace/pp?sku=58kec53jbhfbaqpgzivdyhdo9
+```
 
 ## Enable Worker Nodes to Join Your Cluster
 You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
