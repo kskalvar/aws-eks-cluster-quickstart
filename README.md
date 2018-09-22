@@ -202,14 +202,13 @@ aws eks describe-cluster --name eks-cluster --query cluster.endpoint
 aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data  
 ```
 
-### control-kubeconfig
 Copy the control-kubeconfig template from the github project
 ```
 mkdir -p ~/.kube  
 cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig.txt ~/.kube/control-kubeconfig 
+```
 
-### Edit control-kubeconfig
-edit control-kubeconfig and replace with values above
+### Edit control-kubeconfig and replace with values above
 ```
 <myendpoint>
 <mydata>
