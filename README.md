@@ -105,6 +105,7 @@ Use AWS CloudFormation to configure the Worker Nodes.  This is a step by step pr
 You must subscribe to use this AMI
 ```
 https://aws.amazon.com/marketplace/library/
+ami-058bfb8c236caae89
 ```
 
 ### AWS CloudFormation Console
