@@ -101,13 +101,6 @@ Wait for Status ACTIVE before proceeding
 
 Use AWS CloudFormation to configure the Worker Nodes.  This is a step by step process.
 
-### Enable EKS-optimized AMI with GPU Support
-You must subscribe to use this AMI
-```
-https://aws.amazon.com/marketplace/library/
-ami-0440e4f6b9713faf6
-```
-
 ### AWS CloudFormation Console
 Click on "Create Stack"  
 Select "Specify an Amazon S3 template URL"  
