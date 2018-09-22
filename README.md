@@ -319,4 +319,7 @@ eks-role
 ```
 ## References
 Getting Started with Amazon EKS  
-https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html
+https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html  
+
+Amazon EKS-Optimized AMI  
+https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
