@@ -171,12 +171,14 @@ Click on "Launch"
 
 ## Configure kubectl on Your EC2 Instance
 
-You will need to ssh into the AWS EC2 Instance you created above.  
-This is a step by step process.
+You will need to ssh into the AWS EC2 Instance you created above.  This is a step by step process.
 
+```
 NOTE:  There is a script in /home/ec2-user called ```configure-kube-control```.  You may run this script to automate the  
-       creation and population of environment variables in .kube/aws-auth-cm.yaml and .kube/control-kubeconfig.  Be sure to verify  
-       the values.  Run "aws configure" first as it uses the cli to query for the cluster values.
+       creation and population of environment variables in .kube/aws-auth-cm.yaml and .kube/control-kubeconfig.  Also it
+       uses naming convention specifically used in this HOW-TO.  So if you didn't call the cluster "eks-cluster" it won't
+       work.  Be sure to verify the values.  Run "aws configure" first as it uses the cli to query for the cluster values.
+```
 
 ### Check to insure cloud-init has completed
 
