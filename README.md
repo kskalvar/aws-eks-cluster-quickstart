@@ -105,7 +105,7 @@ Use AWS CloudFormation to configure the Worker Nodes.  This is a step by step pr
 You must subscribe to use this AMI
 ```
 https://aws.amazon.com/marketplace/library/
-ami-058bfb8c236caae89
+ami-0440e4f6b9713faf6
 ```
 
 ### AWS CloudFormation Console
@@ -120,7 +120,7 @@ Stack Name: eks-nodegroup
 ClusterNamme: eks-cluster
 ClusterControlPlaneSecurityGroup: eks-vpc-ControlPlaneSecurityGroup-*
 NodeGroupName: eks-nodegroup
-NodeImageId: ami-058bfb8c236caae89
+NodeImageId: ami-0440e4f6b9713faf6
 KeyName: <Your AWS KeyName>
 VpcId: eks-vpc-VPC
 Subnets: Subnet01, Subnet02, Subnet03
