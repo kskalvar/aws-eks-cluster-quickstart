@@ -173,13 +173,6 @@ Click on "Launch"
 
 You will need to ssh into the AWS EC2 Instance you created above.  This is a step by step process.
 
-```
-NOTE:  There is a script in /home/ec2-user called "configure-kube-control".  You may run this script to automate the  
-       creation and population of environment variables in .kube/aws-auth-cm.yaml and .kube/control-kubeconfig.  Also it
-       uses naming convention specifically used in this HOW-TO.  If you didn't call the cluster "eks-cluster" it won't
-       work.  Run "aws configure" first as it uses the cli to query for the cluster values.
-```
-
 ### Check to insure cloud-init has completed
 
 See contents of "/tmp/install-eks-support" it should say "installation complete".
@@ -192,6 +185,13 @@ aws configure
 AWS Access Key ID []: <Your Access Key ID>
 AWS Secret Access Key []: <Your Secret Access Key>
 Default region name []: us-east-1
+```
+
+```
+NOTE:  There is a script in /home/ec2-user called "configure-kube-control".  You may run this script to automate the  
+       creation and population of environment variables in .kube/aws-auth-cm.yaml and .kube/control-kubeconfig.  It
+       uses the naming convention I specified in this HOW-TO.  So if you didn't use the naming convention it won't work.
+       If you do use the script then all you need to do is run "Test Cluster" and "Test Cluster Nodes" steps.
 ```
 
 ### control-kubeconfig
