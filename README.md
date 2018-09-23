@@ -44,17 +44,6 @@ eks-role
 ```
 Click on "Create role"
 
-## Add Amazon EC2 Full Access to Service Role
-Use the AWS Console to add EC2 Full Access so you can provision EC2 Load Balancers from kubectl
-
-### AWS IAM Dashboard
-Select Roles    
-Click on "eks-role"    
-Click on "Attach policies"  
-Enter "EC2FullAccess" in "Filter policies"  
-Select "AmazonEC2FullAccess"  
-Click on "Attach Policy"  
-
 ## Create your Amazon EKS Cluster VPC
 
 Use the AWS CloudFormation to configure the Cluster VPC.  This is a step by step process.
