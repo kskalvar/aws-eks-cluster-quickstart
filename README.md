@@ -144,9 +144,10 @@ Click on "Choose File" and Select "cloud-init" from project cloud-deployment dir
 ```  
 Click on "Next: Add Storage"  
 Click on "Next" Add Tags"  
-Add Tags
+Click on "Add Tag"
 ```
-Name kubectl-console
+Key: Name
+Value: kubectl-console
 ```
 Click on "Next: Configure Security Group"  
 Configure Security Group  
