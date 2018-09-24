@@ -289,14 +289,15 @@ Wait for "eks-nodegroup" to be deleted before proceeding
 
 ### AWS EKS
 Delete "eks-cluster"  
-Wait for cluster to be deleted before proceeding, pretty slow?  Really slow!  
+Wait for cluster to be deleted before proceeding.  Really slow!  
 
 ### AWS CloudFormation
 Delete "eks-vpc"  
-Wait for "eks-vpc" to be deleted before proceeding
+Wait for vpc to be deleted before proceeding
 
 ### AWS EC2
 Delete "kubectl-console" Instance
+Wait for instance to be deleted before proceeding
 
 ### AWS IAM Roles
 Delete the following Roles:
