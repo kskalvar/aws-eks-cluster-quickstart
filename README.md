@@ -1,13 +1,10 @@
 AWS Elastic Kubernetes Service (EKS) QuickStart  
 ===============================================
 
-This solution shows how to create an AWS EKS Cluster and deploy a simple web application with an external Load Balancer. This readme updates an article "Getting Started with Amazon EKS" referenced below and provides a more basic step by step process.
-
-Unfortunately this is a pretty manual effort right now.
+This solution shows how to create an AWS EKS Cluster and deploy a simple web application with an external Load Balancer. This readme updates an article "Getting Started with Amazon EKS" referenced below and provides a more basic step by step process.  Unfortunately this is a pretty manual effort right now.
 
 Steps:  
   Create your Amazon EKS Service Role  
-  Add Amazon EC2 Full Access to Service Role  
   Create your Amazon EKS Cluster VPC  
   Create your Amazon EKS Cluster  
   Launch and Configure Your Amazon EKS Worker Nodes  
@@ -43,17 +40,6 @@ Enter "Role Name"
 eks-role
 ```
 Click on "Create role"
-
-## Add Amazon EC2 Full Access to Service Role
-Use the AWS Console to add EC2 Full Access so you can provision EC2 Load Balancers from kubectl
-
-### AWS IAM Dashboard
-Select Roles    
-Click on "eks-role"    
-Click on "Attach policies"  
-Enter "EC2FullAccess" in "Filter policies"  
-Select "AmazonEC2FullAccess"  
-Click on "Attach Policy"  
 
 ## Create your Amazon EKS Cluster VPC
 
@@ -141,7 +127,7 @@ Click on "Launch Instance"
 Click on "Community AMIs"  
 Search community AMIs
 ```
-ami-0ff8a91507f77f867
+Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type - ami-0ff8a91507f77f867 
 ```  
 Click on "Select"
 
@@ -158,9 +144,10 @@ Click on "Choose File" and Select "cloud-init" from project cloud-deployment dir
 ```  
 Click on "Next: Add Storage"  
 Click on "Next" Add Tags"  
-Add Tags
+Click on "Add Tag"
 ```
-Name kubectl-console
+Key: Name
+Value: kubectl-console
 ```
 Click on "Next: Configure Security Group"  
 Configure Security Group  
@@ -302,14 +289,15 @@ Wait for "eks-nodegroup" to be deleted before proceeding
 
 ### AWS EKS
 Delete "eks-cluster"  
-Wait for cluster to be deleted before proceeding, pretty slow?  Really slow!  
+Wait for cluster to be deleted before proceeding.  Really slow!  
 
 ### AWS CloudFormation
 Delete "eks-vpc"  
-Wait for "eks-vpc" to be deleted before proceeding
+Wait for vpc to be deleted before proceeding
 
 ### AWS EC2
 Delete "kubectl-console" Instance
+Wait for instance to be deleted before proceeding
 
 ### AWS IAM Roles
 Delete the following Roles:
