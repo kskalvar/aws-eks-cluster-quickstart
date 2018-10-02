@@ -296,7 +296,7 @@ Delete "eks-vpc"
 Wait for vpc to be deleted before proceeding
 
 ### AWS EC2
-Delete "kubectl-console" Instance
+Delete "kubectl-console" Instance  
 Wait for instance to be deleted before proceeding
 
 ### AWS IAM Roles
