@@ -7,3 +7,5 @@ kubectl apply -f ~/.kube/eks-admin-service-account.yaml
 kubectl apply -f ~/.kube/eks-admin-cluster-role-binding.yaml
 
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk '{print $1}')
+
+echo http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
