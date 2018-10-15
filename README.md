@@ -12,6 +12,7 @@ Steps:
   Configure kubectl on Your EC2 Instance  
   Enable Worker Nodes to Join Your Cluster  
   Deploy WebApp to Your Cluster  
+  Configure Kube Dashboard
   Remove Your AWS EKS Cluster  
 
 
@@ -274,6 +275,19 @@ Using your client-side browser enter the following URL
 ```
 http://<EXTERNAL-IP>
 ```
+
+## Configure Kube Dashboard
+
+You will need to ssh into the AWS EC2 Instance you created above and redirect port 8001.  This is a step by step process.
+
+### Connect to EC2 Instance redirecting port 8001
+ssh -i <key-pair.pem> ec2-user@XX-XX-XX.compute-1.amazonaws.com -L 8001:localhost:8001
+
+
+
+
+
+
 
 ### Delete Deployment, Service
 Use kubectl to delete application
