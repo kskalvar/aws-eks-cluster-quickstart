@@ -36,7 +36,7 @@ write_files:
         runuser -l ec2-user -c 'git clone https://github.com/kskalvar/aws-eks-cluster-quickstart.git'
         
         echo "control-kubeconfig" >> /tmp/install-eks-support
-        runuser -l ec2-user -c 'mkdir -p ~/.kube'  
+        runuser -l ec2-user -c 'mkdir -p ~/.kube'
         runuser -l ec2-user -c 'cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig.txt ~/.kube' 
         runuser -l ec2-user -c 'echo "export KUBECONFIG=~/.kube/control-kubeconfig" >> ~/.bashrc'
 
@@ -46,7 +46,17 @@ write_files:
         echo "install configure-kube-control script" >> /tmp/install-eks-support
         runuser -l ec2-user -c 'cp ~/aws-eks-cluster-quickstart/scripts/configure-kube-control ~'
         runuser -l ec2-user -c 'chmod 777 configure-kube-control'
-
+        
+        echo "eks-admin-cluster-role-binding.yaml" >> /tmp/install-eks-support
+        runuser -l ec2-user -c 'cp ~/aws-eks-cluster-quickstart/kube-config/eks-admin-cluster-role-binding.yaml ~/.kube'
+        
+        echo "eks-admin-service-account.yaml" >> /tmp/install-eks-support
+        runuser -l ec2-user -c 'cp ~/aws-eks-cluster-quickstart/kube-config/eks-admin-service-account.yaml ~/.kube'
+        
+        echo "install configure-kube-dashboard script" >> /tmp/install-eks-support
+        runuser -l ec2-user -c 'cp ~/aws-eks-cluster-quickstart/scripts/configure-kube-dashboard ~'
+        runuser -l ec2-user -c 'chmod 777 configure-kube-dashboard'
+  
         echo "set AWS Region us-east-1" >> /tmp/install-eks-support
         runuser -l ec2-user -c 'echo "export AWS_DEFAULT_REGION=us-east-1" >> ~/.bashrc'
 
