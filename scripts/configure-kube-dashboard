@@ -5,3 +5,5 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/de
 
 kubectl apply -f ~/.kube/eks-admin-service-account.yaml
 kubectl apply -f ~/.kube/eks-admin-cluster-role-binding.yaml
+
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk '{print $1}')
