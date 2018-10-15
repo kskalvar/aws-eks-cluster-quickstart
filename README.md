@@ -12,7 +12,7 @@ Steps:
   Configure kubectl on Your EC2 Instance  
   Enable Worker Nodes to Join Your Cluster  
   Deploy WebApp to Your Cluster  
-  Configure Kube Dashboard
+  Configure Kube Dashboard  
   Remove Your AWS EKS Cluster  
 
 
