@@ -10,4 +10,6 @@ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | gre
 
 kubectl proxy &
 
+echo
+echo Use a local browser and goto:
 echo http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
