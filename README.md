@@ -92,7 +92,7 @@ Use AWS CloudFormation to configure the Worker Nodes.  This is a step by step pr
 Click on "Create Stack"  
 Select "Specify an Amazon S3 template URL"  
 ```
-https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2018-08-30/amazon-eks-nodegroup.yaml
+https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2018-11-07/amazon-eks-nodegroup.yaml
 ```
 Click on "Next"  
 ```
