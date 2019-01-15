@@ -35,6 +35,7 @@ Choose the service that will use this role
 EKS
 ```  
 Click on "Next: Permissions"  
+Click on "Next: Tags"
 Click on "Next: Review"  
 Enter "Role Name"
 ```
