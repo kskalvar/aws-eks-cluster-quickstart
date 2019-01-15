@@ -76,7 +76,7 @@ Click on "Amazon EKS/Clusters"
 Click on "Create cluster"  
 ```
 Cluster name: eks-cluster
-Kubernetes version:  1.10
+Kubernetes version:  1.11
 Role ARN: eks-role
 VPC: eks-vpc-VPC
 Subnets:  Should preselect all available
