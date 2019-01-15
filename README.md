@@ -69,7 +69,9 @@ Wait for Status CREATE_COMPLETE before proceeding
 Use the AWS Console to configure the EKS Cluster.  This is a step by step process and should take approximately 10 minutes.
 
 ### AWS EKS Dashboard
-Click on "Clusters"  
+
+From the left-hand Menu  
+Click on "Amazon EKS/Clusters"  
 
 Click on "Create cluster"  
 ```
