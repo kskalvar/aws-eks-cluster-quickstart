@@ -292,16 +292,16 @@ kubectl delete deployment,service web
 
 You will need to ssh into the AWS EC2 Instance you created above and redirect port 8001.  This is a step by step process.
 
-### Connect to EC2 Instance redirecting port 8001 Locally
-```
-ssh -i key-pair.pem ec2-user@XX-XX-XX.compute-1.amazonaws.com -L 8001:localhost:8001
-```
-
 ### configure-kube-dashboard
 
 ```
 NOTE:  There is a script in /home/ec2-user called "configure-kube-dashboard".  You may run this script to automate the  
        creation of environment variables and startup of kubectl proxy.
+```
+
+### Connect to EC2 Instance redirecting port 8001 Locally
+```
+ssh -i <private key> ec2-user@<ec2 instance ip address> -L 8001:localhost:8001
 ```
 
 ### Test from browser
