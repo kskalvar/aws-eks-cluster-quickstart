@@ -182,10 +182,12 @@ Default region name []: us-east-1
 
 ### Configure kubectl
 ```
-NOTE:  There is a script in /home/ec2-user called "configure-kube-control".  You may run this script to automate the  
-       creation and population of environment variables in .kube/aws-auth-cm.yaml and .kube/control-kubeconfig.  It
-       uses the naming convention I specified in this HOW-TO.  So if you didn't use the naming convention it won't work.
-       If you do use the script then all you need to do is run "Test Cluster" and "Test Cluster Nodes" steps.
+NOTE:  There is a script in /home/ec2-user called "configure-kube-control".  
+       You may run this script to automate the creation and population of environment 
+       variables in .kube/aws-auth-cm.yaml and .kube/control-kubeconfig.  It
+       uses the naming convention I specified in this HOW-TO.  So if you didn't
+       use the naming convention it won't work.  If you do use the script then all
+       you need to do is run "Test Cluster" and "Test Cluster Nodes" steps.
 ```
 
 ## Gather control-kubeconfig information
