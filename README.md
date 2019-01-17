@@ -297,8 +297,9 @@ You will need to ssh into the AWS EC2 Instance you created above and redirect po
 ### configure-kube-dashboard
 
 ```
-NOTE:  There is a script in /home/ec2-user called "configure-kube-dashboard".  You may run this script to automate the  
-       creation of environment variables and startup of kubectl proxy.
+NOTE:  There is a script in /home/ec2-user called "configure-kube-dashboard".  
+       You may run this script to automate the creation of environment variables
+       and startup of kubectl proxy.
 ```
 
 ### Connect to EC2 Instance redirecting port 8001 Locally
