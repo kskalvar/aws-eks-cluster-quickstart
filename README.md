@@ -178,6 +178,7 @@ AWS Secret Access Key []: <Your Secret Access Key>
 Default region name []: us-east-1
 ```
 
+### Configure kubectl
 ```
 NOTE:  There is a script in /home/ec2-user called "configure-kube-control".  You may run this script to automate the  
        creation and population of environment variables in .kube/aws-auth-cm.yaml and .kube/control-kubeconfig.  It
@@ -185,7 +186,7 @@ NOTE:  There is a script in /home/ec2-user called "configure-kube-control".  You
        If you do use the script then all you need to do is run "Test Cluster" and "Test Cluster Nodes" steps.
 ```
 
-### control-kubeconfig
+## Gather control-kubeconfig information
 Gather cluster name, endpoint, and certificate for use below
 ```
 aws eks list-clusters                                                               
@@ -199,7 +200,7 @@ mkdir -p ~/.kube
 cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig.txt ~/.kube/control-kubeconfig 
 ```
 
-### Edit control-kubeconfig and replace with values above
+## Edit control-kubeconfig and replace with values above
 ```
 <myendpoint>
 <mydata>
