@@ -337,7 +337,6 @@ eks-role
 ```
 ### AWS EC2
 Delete "kubectl-console" Instance  
-Wait for instance to be deleted before proceeding
 
 ## References
 Getting Started with Amazon EKS  
