@@ -329,16 +329,16 @@ Wait for cluster to be deleted before proceeding.  Really slow!
 Delete "eks-vpc"  
 Wait for vpc to be deleted before proceeding
 
-### AWS EC2
-Delete "kubectl-console" Instance  
-Wait for instance to be deleted before proceeding
-
 ### AWS IAM Roles
 Delete the following Roles:
 
 ```
 eks-role  
 ```
+### AWS EC2
+Delete "kubectl-console" Instance  
+Wait for instance to be deleted before proceeding
+
 ## References
 Getting Started with Amazon EKS  
 https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html  
