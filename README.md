@@ -24,7 +24,6 @@ The project also includes the Dockerfile for those interested in the configurati
 
 
 ## Create your Amazon EKS Service Role
-
 Use the AWS Console to configure the EKS IAM Role.  This is a step by step process.
 
 ### AWS IAM Dashboard
@@ -46,7 +45,6 @@ eks-role
 Click on "Create role"
 
 ## Create your Amazon EKS Cluster VPC
-
 Use the AWS CloudFormation to configure the Cluster VPC.  This is a step by step process.
 
 ### AWS CloudFormation Console
@@ -67,11 +65,9 @@ Wait for Status CREATE_COMPLETE before proceeding
 
 
 ## Create your Amazon EKS Cluster
-
 Use the AWS Console to configure the EKS Cluster.  This is a step by step process and should take approximately 10 minutes.
 
 ### AWS EKS Dashboard
-
 From the left-hand Menu  
 Click on "Amazon EKS/Clusters"  
 
@@ -84,13 +80,11 @@ VPC: eks-vpc-VPC
 Subnets:  Should preselect all available
 Security groups: eks-vpc-ControlPlaneSecurityGroup-*
 ```
-
 Click on "Create"  
 
 Wait for Status ACTIVE before proceeding
 
 ## Launch and Configure Your Amazon EKS Worker Nodes
-
 Use AWS CloudFormation to configure the Worker Nodes.  This is a step by step process.
 
 ### AWS CloudFormation Console
@@ -124,11 +118,9 @@ Copy NodeInstanceRole Value for use later
 ```
 
 ## Configure Your AWS EC2 Instance
-
 Use AWS Console to configure the EC2 Instance for kubectl.  This is a step by step process.
 
 ### AWS EC2 Dashboard  
-
 Click on "Launch Instance"  
 Click on "Community AMIs"  
 Search community AMIs
@@ -163,7 +155,6 @@ Click on "Review and Launch"
 Click on "Launch"
 
 ## Configure kubectl on Your EC2 Instance
-
 You will need to ssh into the AWS EC2 Instance you created above.  This is a step by step process.
 
 ### Check to insure cloud-init has completed
@@ -172,7 +163,6 @@ See contents of "/tmp/install-eks-support" it should say "installation complete"
 
 
 ### Configure AWS CLI
-
 aws configure
 ```
 AWS Access Key ID []: <Your Access Key ID>
@@ -181,6 +171,7 @@ Default region name []: us-east-1
 ```
 
 ### Configure kubectl
+Configure kubectl to access the cluster
 ```
 NOTE:  There is a script in /home/ec2-user called "configure-kube-control".  
        You may run this script to automate the creation and population of environment 
@@ -190,7 +181,6 @@ NOTE:  There is a script in /home/ec2-user called "configure-kube-control".
        you need to do is run "Test Cluster" and "Test Cluster Nodes" steps.
 ```
 
-## Gather control-kubeconfig information
 Gather cluster name, endpoint, and certificate for use below
 ```
 aws eks list-clusters                                                               
@@ -204,7 +194,7 @@ mkdir -p ~/.kube
 cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig.txt ~/.kube/control-kubeconfig 
 ```
 
-## Edit control-kubeconfig and replace with values above
+Edit and replace control-kubeconfig with values above
 ```
 <myendpoint>
 <mydata>
@@ -221,14 +211,12 @@ kubectl get svc
 ## Enable Worker Nodes to Join Your Cluster
 You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
 
-###  aws-auth-cm.yaml
+###  Configure aws-auth-cm.yaml
 Copy the aws-auth-cm.yaml template from the github project
 ```
 cp ~/aws-eks-cluster-quickstart/kube-config/aws-auth-cm.yaml.txt ~/.kube/aws-auth-cm.yaml
 ```
-
-### Edit aws-auth-cm.yaml
-Replace <myarn> with NodeInstanceRole from output of CloudFormation script "eks-nodegroup"
+Edit and replace <myarn> with NodeInstanceRole from output of CloudFormation script "eks-nodegroup"
 ```
 <myarn>
 ```
@@ -243,7 +231,6 @@ Wait till you see all nodes appear in "STATUS Ready"
 
 
 ## Deploy WebApp to Your Cluster
-
 You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
 
 ### Create Pod
@@ -276,7 +263,7 @@ Capture EXTERNAL-IP for use below
 ```
 kubectl get service web --output wide
 ```
-Wait till you see "EXTERNAL-IP ```*.<your account>.<region>.elb.amazon.com```" 
+Wait till you see "EXTERNAL-IP ```*.<your account>.<region>.elb.amazon.com``` 
 
 ### Test from browser
 Using your client-side browser enter the following URL
@@ -290,25 +277,26 @@ Use kubectl to delete application
 kubectl delete deployment,service web
 ```
 
-## Configure Kube Dashboard
-
-You will need to ssh into the AWS EC2 Instance you created above and redirect port 8001.  This is a step by step process.
+## Configure the Kubernetes Dashboard
+You will need configure the dashboard from the AWS EC2 Instance you created as well as use ssh to create a tunnel on port 8001 from your local machine.  This is a step by step process.
 
 ### configure-kube-dashboard
-
+Configure Kubernetes Dashboard 
 ```
 NOTE:  There is a script in /home/ec2-user called "configure-kube-dashboard".  
-       You may run this script to automate the creation of environment variables
-       and startup of kubectl proxy.
+       You may run this script to automate the installation of the dashboard components into the cluster,
+       configure the service role, and start the kubectl proxy.
 ```
 
 ### Connect to EC2 Instance redirecting port 8001 Locally
+Using ssh from your local machine, open a tunnel to your AWS EC2 Instance
 ```
-ssh -i <private key> ec2-user@<ec2 instance ip address> -L 8001:localhost:8001
+ssh -i <AWS EC2 Private Key> ec2-user@<AWS EC2 Instance IP Address> -L 8001:localhost:8001
 ```
 
-### Test from browser
-Using your client-side browser enter the following URL. The configure-kube-dashboard should also output the token required.
+### Test from Local Browser
+Using your local client-side browser enter the following URL. The configure-kube-dashboard script also generated as output the "Security Token"   
+required to login to the dashboard.
 ```
 http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
 ```
