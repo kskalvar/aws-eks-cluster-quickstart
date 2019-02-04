@@ -11,3 +11,5 @@ arn=`aws iam list-roles  --query Roles[].[Arn] --output text | grep eks-nodegrou
 cd $HOME/.kube
 sed "s|myendpoint|${endpoint}|;s|mydata|${data}|;s|mycluster|${cluster}|" control-kubeconfig.txt > control-kubeconfig
 sed "s|myarn|${arn}|" aws-auth-cm.yaml.txt > aws-auth-cm.yaml
+
+kubectl apply -f ~/.kube/aws-auth-cm.yaml
