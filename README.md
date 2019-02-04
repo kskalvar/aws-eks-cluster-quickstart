@@ -67,8 +67,7 @@ Wait for Status CREATE_COMPLETE before proceeding
 ## Create your Amazon EKS Cluster
 Use the AWS Console to configure the EKS Cluster.  This is a step by step process and should take approximately 10 minutes.
 
-### AWS EKS Dashboard
-From the left-hand Menu  
+### AWS Container Services Console
 Click on "Amazon EKS/Clusters"  
 
 Click on "Create cluster"  
@@ -178,7 +177,7 @@ NOTE:  There is a script in /home/ec2-user called "configure-kube-control".
        variables in .kube/aws-auth-cm.yaml and .kube/control-kubeconfig.  It
        uses the naming convention I specified in this HOW-TO.  So if you didn't
        use the naming convention it won't work.  If you do use the script then all
-       you need to do is run "Test Cluster" and "Test Cluster Nodes" steps.
+       you need to do is run the "Test Cluster" and "Test Cluster Nodes" steps.
 ```
 
 Gather cluster name, endpoint, and certificate for use below
@@ -208,9 +207,6 @@ source ~/.bashrc # To insure you picked up the environment variables
 kubectl get svc 
 ```
 
-## Enable Worker Nodes to Join Your Cluster
-You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
-
 ###  Configure aws-auth-cm.yaml
 Copy the aws-auth-cm.yaml template from the github project
 ```
@@ -220,11 +216,15 @@ Edit and replace <myarn> with NodeInstanceRole from output of CloudFormation scr
 ```
 <myarn>
 ```
+Apply aws-auth-cm.yaml
+```
+kubectl apply -f ~/.kube/aws-auth-cm.yaml
+```
 
 ### Test Cluster Nodes
 Use kubectl to test status of cluster nodes
 ```
-kubectl apply -f ~/.kube/aws-auth-cm.yaml
+source ~/.bashrc # To insure you picked up the environment variables
 kubectl get nodes
 ```
 Wait till you see all nodes appear in "STATUS Ready"
