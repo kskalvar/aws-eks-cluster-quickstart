@@ -137,7 +137,7 @@ Click on "Advanced Details
 ```
 User data
 Select "As file"
-Click on "Choose File" and Select "cloud-init" from project cloud-deployment directory 
+Click on "Choose File" and Select "cloud-init" from project cloud-init directory 
 ```  
 Click on "Next: Add Storage"  
 Click on "Next" Add Tags"  
