@@ -1,0 +1,39 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "Amazon EKS Sample Cluster",
+	"Parameters": 
+	{
+		"ClusterName": {
+			"Type": "String",
+			"Default": "eks-cluster"
+		},
+
+		"ServiceRole": {
+			"Type": "String",
+			"Default": "eks-role"
+		},
+		"ControlPlaneSecurityGroup": {
+			"Type": "String"
+		},
+		"SubnetIds": {
+			"Type": "CommaDelimitedList"
+		}
+	},
+	"Resources": 
+	{
+		"EKSCluster": 
+		{
+			"Type": "AWS::EKS::Cluster",
+			"Properties": 
+			{
+				"Name": {"Ref": "ClusterName"},
+				"Version": "1.11", 
+				"RoleArn": { "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:role/${ServiceRole}"},
+				"ResourcesVpcConfig": {
+					"SecurityGroupIds": [{"Ref": "ControlPlaneSecurityGroup"}],
+					"SubnetIds": {"Ref": "SubnetIds"}
+				}
+			}
+		}
+	}
+}

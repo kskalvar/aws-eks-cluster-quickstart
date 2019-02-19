@@ -1,0 +1,94 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Parameters": 
+	{
+		"ClusterName": 
+		{
+			"Type": "String",
+			"Default": "eks-cluster"
+		},
+
+		"ServiceRole": 
+		{
+			"Type": "String",
+			"Default": "eks-role"
+		},
+
+		"VpcBlock": 
+		{
+			"Type": "String",
+			"Default": "192.168.0.0/16",
+			"Description": "The CIDR range for the VPC. This should be a valid private (RFC 1918) CIDR range."
+		},
+
+		"Subnet01Block": 
+		{
+			"Type": "String",
+			"Default": "192.168.64.0/18",
+			"Description": "CidrBlock for subnet 01 within the VPC"
+		},
+
+		"Subnet02Block": 
+		{
+			"Type": "String",
+			"Default": "192.168.128.0/18",
+			"Description": "CidrBlock for subnet 02 within the VPC"
+		},
+
+		"Subnet03Block": 
+		{
+			"Type": "String",
+			"Default": "192.168.192.0/18",
+			"Description": "CidrBlock for subnet 03 within the VPC. This is used only if the region has more than 2 AZs."
+		}
+	},
+
+	"Resources": 
+	{
+		"AWSAmazonEKSRole": 
+		{
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": 
+			{
+				"TemplateURL": "https://s3.amazonaws.com/998551034662-aws-eks-cluster/eks-role.json",
+				"TimeoutInMinutes": "60",
+				"Parameters": 
+				{
+					"ServiceRole": {"Ref": "ServiceRole"}
+				}
+			}
+		},
+		"AWSAmazonEKSVpc": 
+		{
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": 
+			{
+				"TemplateURL": "https://s3.amazonaws.com/998551034662-aws-eks-cluster/eks-vpc.json",
+				"TimeoutInMinutes": "60",
+				"Parameters": 
+				{
+					"VpcBlock": {"Ref": "VpcBlock"},
+					"Subnet01Block": {"Ref": "Subnet01Block"},
+					"Subnet02Block": {"Ref": "Subnet02Block"},
+					"Subnet03Block": {"Ref": "Subnet03Block"}
+				}
+			}
+		},
+		"AWSAmazonEKSCluster": 
+		{
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": 
+			{
+				"TemplateURL": "https://s3.amazonaws.com/998551034662-aws-eks-cluster/eks-cluster.json",
+				"TimeoutInMinutes": "60",
+				"Parameters": 
+				{
+					"ClusterName": {"Ref": "ClusterName"},
+					"ServiceRole": {"Ref": "ServiceRole"},
+					"ControlPlaneSecurityGroup": {"Fn::GetAtt": ["AWSAmazonEKSVpc", "Outputs.ControlPlaneSecurityGroup"]},
+					"SubnetIds": {"Fn::GetAtt": ["AWSAmazonEKSVpc", "Outputs.SubnetIds"]}
+				}
+			}
+		}
+	}
+}

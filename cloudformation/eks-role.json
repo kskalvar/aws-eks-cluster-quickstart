@@ -1,0 +1,74 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Amazon EKS Sample Service Role",
+        "Parameters": {
+        "ServiceRole": {
+            "Type": "String",
+            "Default": "eks-role"
+        }
+    },
+    "Resources": {
+        "AWSServiceRoleForAmazonEKS": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "eks.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "ManagedPolicyArns": [
+                    "arn:aws:iam::aws:policy/AmazonEKSServicePolicy",
+                    "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+                ],
+                "RoleName": {"Ref": "ServiceRole"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "07d16fa3-1f59-4d3b-b3cb-c1eef085ca01"
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "RoleArn": {
+            "Description": "Allows EKS to manage clusters on your behalf.",
+            "Value": {
+                "Fn::GetAtt": [
+                    "AWSServiceRoleForAmazonEKS",
+                    "Arn"
+                ]
+            },
+            "Export": {
+                "Name": "eks-cluster-demo-RoleArn"
+            }
+        }
+    },
+    "Metadata": {
+        "AWS::CloudFormation::Designer": {
+            "07d16fa3-1f59-4d3b-b3cb-c1eef085ca01": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 60,
+                    "y": 90
+                },
+                "z": 1,
+                "embeds": []
+            }
+        }
+    }
+}

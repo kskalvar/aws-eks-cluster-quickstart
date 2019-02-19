@@ -1,0 +1,359 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Amazon EKS Sample VPC",
+    "Parameters": {
+        "VpcBlock": {
+            "Type": "String",
+            "Default": "192.168.0.0/16",
+            "Description": "The CIDR range for the VPC. This should be a valid private (RFC 1918) CIDR range."
+        },
+        "Subnet01Block": {
+            "Type": "String",
+            "Default": "192.168.64.0/18",
+            "Description": "CidrBlock for subnet 01 within the VPC"
+        },
+        "Subnet02Block": {
+            "Type": "String",
+            "Default": "192.168.128.0/18",
+            "Description": "CidrBlock for subnet 02 within the VPC"
+        },
+        "Subnet03Block": {
+            "Type": "String",
+            "Default": "192.168.192.0/18",
+            "Description": "CidrBlock for subnet 03 within the VPC. This is used only if the region has more than 2 AZs."
+        }
+    },
+    "Conditions": {
+        "Has2Azs": {
+            "Fn::Or": [
+                {
+                    "Fn::Equals": [
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "ap-south-1"
+                    ]
+                },
+                {
+                    "Fn::Equals": [
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "ap-northeast-2"
+                    ]
+                },
+                {
+                    "Fn::Equals": [
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "ca-central-1"
+                    ]
+                },
+                {
+                    "Fn::Equals": [
+                        {
+                            "Ref": "AWS::Region"
+                        },
+                        "cn-north-1"
+                    ]
+                }
+            ]
+        },
+        "HasMoreThan2Azs": {
+            "Fn::Not": [
+                {
+                    "Condition": "Has2Azs"
+                }
+            ]
+        }
+    },
+    "Resources": {
+        "VPC": {
+            "Type": "AWS::EC2::VPC",
+            "Properties": {
+                "CidrBlock": {
+                    "Ref": "VpcBlock"
+                },
+                "EnableDnsSupport": true,
+                "EnableDnsHostnames": true,
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Sub": "${AWS::StackName}-VPC"
+                        }
+                    }
+                ]
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "355a7df2-ffed-4943-93ff-6b1b34f01caa"
+                }
+            }
+        },
+        "InternetGateway": {
+            "Type": "AWS::EC2::InternetGateway",
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "d98df895-52d3-4cb7-b3ac-a8ac02d938c4"
+                }
+            }
+        },
+        "VPCGatewayAttachment": {
+            "Type": "AWS::EC2::VPCGatewayAttachment",
+            "Properties": {
+                "InternetGatewayId": {
+                    "Ref": "InternetGateway"
+                },
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "8b72feeb-c84d-4fa8-bc77-9b366d935778"
+                }
+            }
+        },
+        "RouteTable": {
+            "Type": "AWS::EC2::RouteTable",
+            "Properties": {
+                "VpcId": {
+                    "Ref": "VPC"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "Public Subnets"
+                    },
+                    {
+                        "Key": "Network",
+                        "Value": "Public"
+                    }
+                ]
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "892e40d0-76dd-404e-a28e-86b11146114a"
+                }
+            }
+        },
+        "Route": {
+            "DependsOn": "VPCGatewayAttachment",
+            "Type": "AWS::EC2::Route",
+            "Properties": {
+                "RouteTableId": {
+                    "Ref": "RouteTable"
+                },
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": {
+                    "Ref": "InternetGateway"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "75f23c5f-9041-43f5-a75a-6f333ae7e58c"
+                }
+            }
+        },
+        "Subnet01": {
+            "Type": "AWS::EC2::Subnet",
+            "Metadata": {
+                "Comment": "Subnet 01",
+                "AWS::CloudFormation::Designer": {
+                    "id": "7574ddae-0c74-43e1-b4f8-7d93f3021f5d"
+                }
+            },
+            "Properties": {
+                "AvailabilityZone": {
+                    "Fn::Select": [
+                        "0",
+                        {
+                            "Fn::GetAZs": {
+                                "Ref": "AWS::Region"
+                            }
+                        }
+                    ]
+                },
+                "CidrBlock": {
+                    "Ref": "Subnet01Block"
+                },
+                "VpcId": {
+                    "Ref": "VPC"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Sub": "${AWS::StackName}-Subnet01"
+                        }
+                    }
+                ]
+            }
+        },
+        "Subnet02": {
+            "Type": "AWS::EC2::Subnet",
+            "Metadata": {
+                "Comment": "Subnet 02",
+                "AWS::CloudFormation::Designer": {
+                    "id": "5de6cba1-318a-46b3-8ebd-0eca1599a2c1"
+                }
+            },
+            "Properties": {
+                "AvailabilityZone": {
+                    "Fn::Select": [
+                        "1",
+                        {
+                            "Fn::GetAZs": {
+                                "Ref": "AWS::Region"
+                            }
+                        }
+                    ]
+                },
+                "CidrBlock": {
+                    "Ref": "Subnet02Block"
+                },
+                "VpcId": {
+                    "Ref": "VPC"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Sub": "${AWS::StackName}-Subnet02"
+                        }
+                    }
+                ]
+            }
+        },
+        "Subnet03": {
+            "Condition": "HasMoreThan2Azs",
+            "Type": "AWS::EC2::Subnet",
+            "Metadata": {
+                "Comment": "Subnet 03",
+                "AWS::CloudFormation::Designer": {
+                    "id": "625a5b3a-bafa-4307-b362-e36304a5c16b"
+                }
+            },
+            "Properties": {
+                "AvailabilityZone": {
+                    "Fn::Select": [
+                        "2",
+                        {
+                            "Fn::GetAZs": {
+                                "Ref": "AWS::Region"
+                            }
+                        }
+                    ]
+                },
+                "CidrBlock": {
+                    "Ref": "Subnet03Block"
+                },
+                "VpcId": {
+                    "Ref": "VPC"
+                },
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": {
+                            "Fn::Sub": "${AWS::StackName}-Subnet03"
+                        }
+                    }
+                ]
+            }
+        },
+        "Subnet01RouteTableAssociation": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "Subnet01"
+                },
+                "RouteTableId": {
+                    "Ref": "RouteTable"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "ea9155c8-a32a-4948-8685-d37db41cb1b6"
+                }
+            }
+        },
+        "Subnet02RouteTableAssociation": {
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "Subnet02"
+                },
+                "RouteTableId": {
+                    "Ref": "RouteTable"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "4f81af4c-565c-442b-87bc-8387cef80d37"
+                }
+            }
+        },
+        "Subnet03RouteTableAssociation": {
+            "Condition": "HasMoreThan2Azs",
+            "Type": "AWS::EC2::SubnetRouteTableAssociation",
+            "Properties": {
+                "SubnetId": {
+                    "Ref": "Subnet03"
+                },
+                "RouteTableId": {
+                    "Ref": "RouteTable"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "26f2a8ac-0386-4ffb-94d5-c4a804470580"
+                }
+            }
+        },
+        "ControlPlaneSecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Cluster communication with worker nodes",
+                "VpcId": {
+                    "Ref": "VPC"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "6c697a9e-7f6f-4bc6-8a15-a071e59e98b2"
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "VpcId": {
+            "Description": "The VpcId",
+            "Value": {
+                "Ref": "VPC"
+            },
+            "Export": {
+                "Name": "eks-cluster-demo-VpcId"
+            }
+        },
+        "ControlPlaneSecurityGroup": {
+            "Description": "The ControlPlaneSecurityGroup",
+            "Value": {
+                "Ref": "ControlPlaneSecurityGroup"
+            },
+            "Export": {
+                "Name": "eks-cluster-demo-ControlPlaneSecurityGroup"
+            }
+        },
+        "SubnetIds": {
+            "Description": "The SubnetIds",
+            "Value": {
+                "Fn::Join": [",",[{"Ref": "Subnet01"},{"Ref": "Subnet02"},{"Ref": "Subnet03"}]]
+            },
+            "Export": {
+                "Name": "eks-cluster-demo-SubnetIds"
+            }
+        }
+    }
+}
