@@ -6,7 +6,7 @@
 cluster=`aws eks list-clusters --output text --query clusters`
 endpoint=`aws eks describe-cluster --name eks-cluster --query cluster.endpoint`
 data=`aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data`
-arn=`aws iam list-roles  --query Roles[].[Arn] --output text | grep eks-nodegroup-NodeInstanceRole`
+arn=`aws iam list-roles  --query Roles[].[Arn] --output text | grep NodeInstanceRole`
 
 cd $HOME/.kube
 sed "s|myendpoint|${endpoint}|;s|mydata|${data}|;s|mycluster|${cluster}|" control-kubeconfig.txt > control-kubeconfig
