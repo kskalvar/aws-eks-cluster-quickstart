@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Amazon EKS Sample Service Role",
+    "Description": "Amazon EKS - Service Role",
         "Parameters": {
         "ServiceRole": {
             "Type": "String",
