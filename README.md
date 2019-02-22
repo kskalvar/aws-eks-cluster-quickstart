@@ -263,7 +263,6 @@ Capture EXTERNAL-IP for use below
 ```
 kubectl get service web --output wide
 ```
-Wait till you see "EXTERNAL-IP ```*.<your account>.<region>.elb.amazon.com``` 
 
 ### Test from browser
 Using your client-side browser enter the following URL
@@ -295,8 +294,8 @@ ssh -i <AWS EC2 Private Key> ec2-user@<AWS EC2 Instance IP Address> -L 8001:loca
 ```
 
 ### Test from Local Browser
-Using your local client-side browser enter the following URL. The configure-kube-dashboard script also generated as output the "Security Token"   
-required to login to the dashboard.
+Using your local client-side browser enter the following URL. The configure-kube-dashboard script
+also generated a "Security Token" required to login to the dashboard.
 ```
 http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
 ```
