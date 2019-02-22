@@ -45,7 +45,7 @@
 		"KeyName": 
 		{
 			"Description": "The EC2 Key Pair to allow SSH access to the instances",
-			"Type": "String"
+			"Type": "AWS::EC2::KeyPair::KeyName"
 		},
 
 		"NodeImageId": 
@@ -59,7 +59,7 @@
 		{
 			"Description": "EC2 instance type for the node instances",
 			"Type": "String",
-			"Default": "t3.medium",
+			"Default": "t2.small",
 			"AllowedValues": 
 			[
 				"t2.small",
@@ -323,20 +323,22 @@
 					{
 						"Ref": "NodeAutoScalingGroupMaxSize"
 					},
-					
+
 					"NodeInstanceType": 
 					{
 						"Ref": "NodeInstanceType"
 					},
+
 					"NodeImageId": 
 					{
 						"Ref": "NodeImageId"
-					},					
+					},
+
 					"NodeVolumeSize": 
 					{
 						"Ref": "NodeVolumeSize"
-					},										
-					
+					},
+
 					"KeyName": 
 					{
 						"Ref": "KeyName"
