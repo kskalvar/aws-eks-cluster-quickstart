@@ -1,6 +1,6 @@
 {
 	"AWSTemplateFormatVersion": "2010-09-09",
-	"Description": "Amazon EKS - Demo",
+	"Description": "Amazon EKS - Root",
 	"Parameters": 
 	{
 		"ClusterName": 
