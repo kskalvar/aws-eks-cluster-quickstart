@@ -56,7 +56,11 @@ write_files:
         echo "copy configure-kube-dashboard $HOME" >> /tmp/install-eks-support
         runuser -l ec2-user -c 'cp ~/aws-eks-cluster-quickstart/scripts/configure-kube-dashboard ~'
         runuser -l ec2-user -c 'chmod 777 configure-kube-dashboard'
-  
+        
+        echo "copy install-helm $HOME" >> /tmp/install-eks-support
+        runuser -l ec2-user -c 'cp ~/aws-eks-cluster-quickstart/scripts/install-helm ~'
+        runuser -l ec2-user -c 'chmod 777 install-helm'        
+        
         echo "set AWS Region us-east-1" >> /tmp/install-eks-support
         runuser -l ec2-user -c 'echo "export AWS_DEFAULT_REGION=us-east-1" >> ~/.bashrc'
 
