@@ -318,7 +318,6 @@ Wait for vpc to be deleted before proceeding
 
 ### AWS IAM Roles
 Delete the following Roles:
-
 ```
 eks-role  
 ```
