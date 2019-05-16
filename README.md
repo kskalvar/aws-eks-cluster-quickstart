@@ -178,6 +178,8 @@ NOTE:  There is a script in /home/ec2-user called "configure-kube-control".
        uses the naming convention I specified in this HOW-TO.  So if you didn't
        use the naming convention it won't work.  If you do use the script then all
        you need to do is run the "Test Cluster" and "Test Cluster Nodes" steps.
+       
+     ./configure-kube-control
 ```
 
 Gather cluster name, endpoint, and certificate for use below
