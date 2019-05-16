@@ -124,7 +124,7 @@ Click on "Launch Instance"
 Click on "Community AMIs"  
 Search community AMIs
 ```
-Amazon Linux AMI 2018.03.0 (HVM), SSD Volume Type - ami-0080e4c5bc078760e 
+Amazon Linux 2 AMI (HVM), SSD Volume Type - ami-0c6b1d09930fac512 
 ```  
 Click on "Select"
 
