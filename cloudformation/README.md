@@ -8,7 +8,7 @@ Steps:
   Create AWS EKS Cluster using AWS CloudFormation  
 
 ## Create AWS EKS Cluster using AWS CloudFormation 
-Use the AWS Console to configure the EKS IAM Role.  This is a step by step process.
+Use the AWS Console to configure the EKS Cluster.  This is a step by step process.
 
 ### AWS CloudFormation Dashboard
 Click on "Create Stack"  
