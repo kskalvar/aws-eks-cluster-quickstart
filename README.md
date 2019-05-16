@@ -287,6 +287,8 @@ Configure Kubernetes Dashboard
 NOTE:  There is a script in /home/ec2-user called "configure-kube-dashboard".  
        You may run this script to automate the installation of the dashboard components into the cluster,
        configure the service role, and start the kubectl proxy.
+       
+./configure-kube-dashboard
 ```
 
 ### Connect to EC2 Instance redirecting port 8001 Locally
