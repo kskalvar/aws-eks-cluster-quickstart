@@ -133,7 +133,7 @@ Choose Instance Type
 t2.micro
 ```
 Click on "Next: Configure Instance Details"  
-Click on "Advanced Details
+Expand Advanced Details
 ```
 User data
 Select "As file"
@@ -148,10 +148,13 @@ Value: kubectl-console
 ```
 Click on "Next: Configure Security Group"  
 Configure Security Group  
-Select "Select an existing security group"  
-Select "default"  
+Select "Create a new security group"  
+Select "launch-wizard-1"  
 Click on "Review and Launch"    
-Click on "Launch"
+Click on "Launch"  
+``
+Note:  Be sure select an "Choose an existing key pair" or "Create a new key pair"
+```
 
 ## Configure kubectl on Your EC2 Instance
 You will need to ssh into the AWS EC2 Instance you created above.  This is a step by step process.
