@@ -152,7 +152,7 @@ Select "Create a new security group"
 Select "launch-wizard-1"  
 Click on "Review and Launch"    
 Click on "Launch"  
-``
+```
 Note:  Be sure select an "Choose an existing key pair" or "Create a new key pair"
 ```
 
