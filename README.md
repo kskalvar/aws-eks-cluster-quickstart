@@ -6,11 +6,11 @@ This solution shows how to create an AWS EKS Cluster and deploy a simple web app
 Note:  This how-to assumes you are creating the eks cluster in us-east-1
 
 Steps:  
+  Configure Your AWS EC2 Instance  
   Create your Amazon EKS Service Role  
   Create your Amazon EKS Cluster VPC  
   Create your Amazon EKS Cluster  
   Launch and Configure Your Amazon EKS Worker Nodes  
-  Configure Your AWS EC2 Instance  
   Configure kubectl on Your EC2 Instance  
   Enable Worker Nodes to Join Your Cluster  
   Deploy WebApp to Your Cluster  
@@ -22,6 +22,46 @@ To make this first cluster easy to deploy we'll use a docker image located in Do
 
 The project also includes the Dockerfile for those interested in the configuration of the actual application or to build your own and deploy using ECR.
 
+
+## Configure Your AWS EC2 Instance
+Use AWS Console to configure the EC2 Instance for kubectl.  This is a step by step process.
+
+### AWS EC2 Dashboard  
+Click on "Launch Instance"  
+Click on "Community AMIs"  
+Search community AMIs
+```
+Amazon Linux 2 AMI (HVM), SSD Volume Type - ami-0c6b1d09930fac512 
+```  
+Click on "Select"
+
+Choose Instance Type
+```
+t2.micro
+```
+Click on "Next: Configure Instance Details"  
+Expand Advanced Details
+```
+User data
+Select "As file"
+Click on "Choose File" and Select "cloud-init" from project cloud-init directory 
+```  
+Click on "Next: Add Storage"  
+Click on "Next" Add Tags"  
+Click on "Add Tag"
+```
+Key: Name
+Value: kubectl-console
+```
+Click on "Next: Configure Security Group"  
+Configure Security Group  
+Select "Create a new security group"  
+Select "launch-wizard-1"  
+Click on "Review and Launch"    
+Click on "Launch"  
+```
+Note:  Be sure select an "Choose an existing key pair" or "Create a new key pair"
+```
 
 ## Create your Amazon EKS Service Role
 Use the AWS Console to configure the EKS IAM Role.  This is a step by step process.
@@ -114,46 +154,6 @@ You should be able to see the additional nodes visible in AWS EC2 Console
 Click on "Outputs" Tab Below
 ```
 Copy NodeInstanceRole Value for use later
-```
-
-## Configure Your AWS EC2 Instance
-Use AWS Console to configure the EC2 Instance for kubectl.  This is a step by step process.
-
-### AWS EC2 Dashboard  
-Click on "Launch Instance"  
-Click on "Community AMIs"  
-Search community AMIs
-```
-Amazon Linux 2 AMI (HVM), SSD Volume Type - ami-0c6b1d09930fac512 
-```  
-Click on "Select"
-
-Choose Instance Type
-```
-t2.micro
-```
-Click on "Next: Configure Instance Details"  
-Expand Advanced Details
-```
-User data
-Select "As file"
-Click on "Choose File" and Select "cloud-init" from project cloud-init directory 
-```  
-Click on "Next: Add Storage"  
-Click on "Next" Add Tags"  
-Click on "Add Tag"
-```
-Key: Name
-Value: kubectl-console
-```
-Click on "Next: Configure Security Group"  
-Configure Security Group  
-Select "Create a new security group"  
-Select "launch-wizard-1"  
-Click on "Review and Launch"    
-Click on "Launch"  
-```
-Note:  Be sure select an "Choose an existing key pair" or "Create a new key pair"
 ```
 
 ## Configure kubectl on Your EC2 Instance
