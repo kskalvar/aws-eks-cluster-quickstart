@@ -3,7 +3,7 @@ AWS Elastic Kubernetes Service (EKS) QuickStart
 
 This solution shows how to create an AWS EKS Cluster and deploy a simple web application with an external Load Balancer. This readme updates an article "Getting Started with Amazon EKS" referenced below and provides a more basic step by step process.  Unfortunately this is a pretty manual effort right now.
 
-Note:  This how-to assumes you are creating the eks cluster in us-east-1
+Note:  This how-to assumes you are creating the eks cluster in us-east-1 and you have access to the AWS Root Account
 
 Steps:  
   Configure Your AWS EC2 Instance  
@@ -157,7 +157,13 @@ Copy NodeInstanceRole Value for use later
 ```
 
 ## Configure kubectl on Your EC2 Instance
-You will need to ssh into the AWS EC2 Instance you created above.  This is a step by step process.
+You will need to ssh into the AWS EC2 Instance you created above.  This is a step by step process.  
+
+### Connect to EC2 Instance
+Using ssh from your local machine, connect to your AWS EC2 Instance
+```
+ssh -i <AWS EC2 Private Key> ec2-user@<AWS EC2 Instance IP Address>
+```
 
 ### Check to insure cloud-init has completed
 
