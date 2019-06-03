@@ -29,7 +29,6 @@ Use AWS Console to configure the EC2 Instance for kubectl.  This is a step by st
 ### AWS EC2 Dashboard  
 Click on "Launch Instance"  
 Click on "Quick Start"  
-Search community AMIs
 ```
 Amazon Linux 2 AMI (HVM), SSD Volume Type - ami-0c6b1d09930fac512 
 ```  
