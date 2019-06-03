@@ -54,8 +54,6 @@ Value: kubectl-console
 ```
 Click on "Next: Configure Security Group"  
 Configure Security Group  
-Select "Create a new security group"  
-Select "launch-wizard-1"  
 Click on "Review and Launch"    
 Click on "Launch"  
 ```
