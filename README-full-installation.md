@@ -174,6 +174,11 @@ AWS Access Key ID []: <Your Access Key ID>
 AWS Secret Access Key []: <Your Secret Access Key>
 Default region name []: us-east-1
 ```
+Test aws cli
+```
+aws s3 ls
+```
+
 
 ### Configure kubectl
 Gather cluster name, endpoint, and certificate for use below
@@ -203,7 +208,7 @@ source ~/.bashrc # To insure you picked up the environment variables
 kubectl get svc 
 ```
 
-###  Configure aws-auth-cm.yaml
+###  Enable Worker Nodes to Join Your Cluster
 Copy the aws-auth-cm.yaml template from the github project
 ```
 cp ~/aws-eks-cluster-quickstart/kube-config/aws-auth-cm.yaml.txt ~/.kube/aws-auth-cm.yaml

@@ -39,8 +39,8 @@ Click on "Next: Configure Instance Details"
 Expand Advanced Details
 ```
 User data
-Select "As file"
-Click on "Choose File" and Select "cloud-init" from project cloud-init directory 
+Select "As text"
+Cut and Paste contents of file from "aws-eks-cluster-quickstart/cloud-init/cloud-init" in github 
 ```  
 Click on "Next: Add Storage"  
 Click on "Next" Add Tags"  
@@ -50,7 +50,7 @@ Key: Name
 Value: kubectl-console
 ```
 Click on "Next: Configure Security Group"  
-Configure Security Group  
+
 Click on "Review and Launch"    
 Click on "Launch"  
 ```
@@ -81,6 +81,8 @@ Select "I acknowledge that AWS CloudFormation might require the following capabi
 ```
 Click on "Create"  
 
+Wait for Status CREATE_COMPLETE before proceeding  
+
 ## Configure kubectl on Your EC2 Instance
 You will need to ssh into the AWS EC2 Instance you created above.  This is a step by step process.  
 
@@ -91,9 +93,7 @@ ssh -i <AWS EC2 Private Key> ec2-user@<AWS EC2 Instance IP Address>
 ```
 
 ### Check to insure cloud-init has completed
-
 See contents of "/tmp/install-eks-support" it should say "installation complete".
-
 
 ### Configure AWS CLI
 aws configure
@@ -101,6 +101,10 @@ aws configure
 AWS Access Key ID []: <Your Access Key ID>
 AWS Secret Access Key []: <Your Secret Access Key>
 Default region name []: us-east-1
+```
+Test aws cli
+```
+aws s3 ls
 ```
 
 ### Configure kubectl
@@ -134,16 +138,10 @@ Wait till you see all nodes appear in "STATUS Ready"
 ## Deploy WebApp to Your Cluster
 You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
 
-### Create Pod
+### Deploy Web App
 Use kubectl to create a single pod
 ```
-kubectl run web --image=kskalvar/web --port=5000
-```
-
-### Scale Pod
-Use kubectl to scale pod
-```
-kubectl scale deployment web --replicas=3
+kubectl apply -f ~/aws-eks-cluster-quickstart/scripts/web-deployment-service.yaml
 ```
 
 ### Show Pods Running
@@ -152,12 +150,6 @@ Use kubectl to display pods
 kubectl get pods --output wide
 ```
 Wait till you see all pods appear in "STATUS Running"
-
-### Create Load Balancer
-Use kubectl to create AWS EC2 LoadBalancer
-```
-kubectl expose deployment web --port=80 --target-port=5000 --type="LoadBalancer"
-```
 
 ### Get AWS External Load Balancer Address
 Capture EXTERNAL-IP for use below
@@ -174,7 +166,7 @@ http://<EXTERNAL-IP>
 ### Delete Deployment, Service
 Use kubectl to delete application
 ```
-kubectl delete deployment,service web
+kubectl delete -f ~/aws-eks-cluster-quickstart/scripts/web-deployment-service.yaml
 ```
 
 ## Configure the Kubernetes Dashboard (optional)
