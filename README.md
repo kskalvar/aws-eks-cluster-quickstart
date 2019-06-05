@@ -6,19 +6,16 @@ This solution shows how to create an AWS EKS Cluster and deploy a simple web app
 Note:  This how-to assumes you are creating the eks cluster in us-east-1 and you have access to the AWS Root Account
 
 Steps:  
+
   Configure Your AWS EC2 Instance  
-  Create your Amazon EKS Service Role  
-  Create your Amazon EKS Cluster VPC  
-  Create your Amazon EKS Cluster  
-  Launch and Configure Your Amazon EKS Worker Nodes  
-  Configure kubectl on Your EC2 Instance  
-  Enable Worker Nodes to Join Your Cluster  
+  Create AWS EKS Cluster using AWS CloudFormation  
+  Configure kubectl on Your EC2 Instance   
   Deploy WebApp to Your Cluster  
-  Configure the Kubernetes Dashboard   
+  Configure the Kubernetes Dashboard (optional)
   Remove Your AWS EKS Cluster  
 
 
-To make this first cluster easy to deploy we'll use a docker image located in DockerHub at kskalvar/web.  This image is nothing more than a simple webapp that returns the current ip address of the container it's running in.  We'll create an external AWS Load Balancer and you should see a unique ip address as it is load balanced across containers.
+To make this first microservice easy to deploy we'll use a docker image located in DockerHub at kskalvar/web.  This image is nothing more than a simple webapp that returns the current ip address of the container it's running in.  We'll create an external AWS Load Balancer and you should see a unique ip address as it is load balanced across containers.
 
 The project also includes the Dockerfile for those interested in the configuration of the actual application or to build your own and deploy using ECR.
 
@@ -60,98 +57,29 @@ Click on "Launch"
 Note:  Be sure select an "Choose an existing key pair" or "Create a new key pair"
 ```
 
-## Create your Amazon EKS Service Role
-Use the AWS Console to configure the EKS IAM Role.  This is a step by step process.
+## Create AWS EKS Cluster using AWS CloudFormation 
+Use the AWS Console to configure the EKS Cluster.  This is a step by step process.
 
-### AWS IAM Dashboard
-Select Roles  
-
-Click on "Create role"  
-Select "AWS Service"  
-Choose the service that will use this role  
-```
-EKS
-```  
-Click on "Next: Permissions"  
-Click on "Next: Tags"  
-Click on "Next: Review"  
-Enter "Role Name"
-```
-eks-role
-```
-Click on "Create role"
-
-## Create your Amazon EKS Cluster VPC
-Use the AWS CloudFormation to configure the Cluster VPC.  This is a step by step process.
-
-### AWS CloudFormation Console
+### AWS CloudFormation Dashboard
 Click on "Create Stack"  
 Select "Specify an Amazon S3 template URL"  
 ```
-https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-09/amazon-eks-vpc-sample.yaml
+https://s3.amazonaws.com/998551034662-aws-eks-cluster/eks-cluster-demo.json  
 ```
 Click on "Next"  
+
+Specify Details
 ```
-Stack Name: eks-vpc
+Stack name: eks-cluster-demo
+KeyName: <Your AWS KeyName>
 ```
 Click on "Next"  
 Click on "Next"  
-Click on "Create"
-
-Wait for Status CREATE_COMPLETE before proceeding 
-
-
-## Create your Amazon EKS Cluster
-Use the AWS Console to configure the EKS Cluster.  This is a step by step process and should take approximately 10 minutes.
-
-### AWS Container Services Console
-Click on "Amazon EKS/Clusters"  
-
-Click on "Create cluster"  
 ```
-Cluster name: eks-cluster
-Kubernetes version:  1.11
-Role ARN: eks-role
-VPC: eks-vpc-VPC
-Subnets:  Should preselect all available
-Security groups: eks-vpc-ControlPlaneSecurityGroup-*
+Select "I acknowledge that AWS CloudFormation might create IAM resources with custom names"  
+Select "I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND"  
 ```
 Click on "Create"  
-
-Wait for Status ACTIVE before proceeding
-
-## Launch and Configure Your Amazon EKS Worker Nodes
-Use AWS CloudFormation to configure the Worker Nodes.  This is a step by step process.
-
-### AWS CloudFormation Console
-Click on "Create Stack"  
-Select "Specify an Amazon S3 template URL"  
-```
-https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-09/amazon-eks-nodegroup.yaml
-```
-Click on "Next"  
-```
-Stack Name: eks-nodegroup
-ClusterNamme: eks-cluster
-ClusterControlPlaneSecurityGroup: eks-vpc-ControlPlaneSecurityGroup-*
-NodeGroupName: eks-nodegroup
-NodeImageId: ami-0c24db5df6badc35a
-KeyName: <Your AWS KeyName>
-VpcId: eks-vpc-VPC
-Subnets: Subnet01, Subnet02, Subnet03
-```
-Click on "Next"  
-Click on "Next"  
-Select Check Box "I acknowledge that AWS CloudFormation might create IAM resources"  
-Click on "Create"
-
-Wait for Status CREATE_COMPLETE before proceeding  
-You should be able to see the additional nodes visible in AWS EC2 Console  
-
-Click on "Outputs" Tab Below
-```
-Copy NodeInstanceRole Value for use later
-```
 
 ## Configure kubectl on Your EC2 Instance
 You will need to ssh into the AWS EC2 Instance you created above.  This is a step by step process.  
@@ -188,47 +116,12 @@ NOTE:  There is a script in /home/ec2-user called "configure-kube-control".
 ./configure-kube-control
 ```
 
-Gather cluster name, endpoint, and certificate for use below
-```
-aws eks list-clusters                                                               
-aws eks describe-cluster --name eks-cluster --query cluster.endpoint                
-aws eks describe-cluster --name eks-cluster  --query cluster.certificateAuthority.data  
-```
-
-Copy the control-kubeconfig template from the github project
-```
-mkdir -p ~/.kube  
-cp ~/aws-eks-cluster-quickstart/kube-config/control-kubeconfig.txt ~/.kube/control-kubeconfig 
-```
-
-Edit and replace control-kubeconfig with values above
-```
-<myendpoint>
-<mydata>
-<mycluster>
-```
-
 ### Test Cluster
 Using kubectl test the cluster status
 ```
 source ~/.bashrc # To insure you picked up the environment variables
 kubectl get svc 
 ```
-
-###  Configure aws-auth-cm.yaml
-Copy the aws-auth-cm.yaml template from the github project
-```
-cp ~/aws-eks-cluster-quickstart/kube-config/aws-auth-cm.yaml.txt ~/.kube/aws-auth-cm.yaml
-```
-Edit and replace <myarn> with NodeInstanceRole from output of CloudFormation script "eks-nodegroup"
-```
-<myarn>
-```
-Apply aws-auth-cm.yaml
-```
-kubectl apply -f ~/.kube/aws-auth-cm.yaml
-```
-
 ### Test Cluster Nodes
 Use kubectl to test status of cluster nodes
 ```
@@ -284,8 +177,8 @@ Use kubectl to delete application
 kubectl delete deployment,service web
 ```
 
-## Configure the Kubernetes Dashboard
-You will need configure the dashboard from the AWS EC2 Instance you created as well as use ssh to create a tunnel on port 8001 from your local machine.  This is a step by step process.
+## Configure the Kubernetes Dashboard (optional)
+You will need to configure the dashboard from the AWS EC2 Instance you created as well as use ssh to create a tunnel on port 8001 from your local machine.  This is a step by step process.
 
 ### configure-kube-dashboard
 Configure Kubernetes Dashboard 
@@ -315,22 +208,8 @@ Before proceeding be sure you delete deployment,service web as instructed above.
 script to fail.
 
 ### AWS CloudFormation
-Delete "eks-nodegroup" Stack  
-Wait for "eks-nodegroup" to be deleted before proceeding
+Delete "eks-cluster-demo" Stack  
 
-### AWS EKS
-Delete "eks-cluster"  
-Wait for cluster to be deleted before proceeding.  Really slow!  
-
-### AWS CloudFormation
-Delete "eks-vpc"  
-Wait for vpc to be deleted before proceeding
-
-### AWS IAM Roles
-Delete the following Roles:
-```
-eks-role  
-```
 ### AWS EC2
 Delete "kubectl-console" Instance  
 
