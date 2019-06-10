@@ -64,7 +64,7 @@ Use the AWS Console to configure the EKS Cluster.  This is a step by step proces
 Click on "Create Stack"  
 Select "Specify an Amazon S3 template URL"  
 ```
-https://s3.amazonaws.com/998551034662-aws-eks-cluster/eks-cluster-demo.json  
+https://998551034662-aws-eks-cluster.s3.amazonaws.com/eks-cluster-demo.json
 ```
 Click on "Next"  
 
