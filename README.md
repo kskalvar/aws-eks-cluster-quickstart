@@ -139,7 +139,7 @@ Wait till you see all nodes appear in "STATUS Ready"
 You will need to ssh into the AWS EC2 Instance you created above. This is a step by step process.
 
 ### Deploy Web App
-Use kubectl to create a single pod
+Use kubectl to create the web service
 ```
 kubectl apply -f ~/aws-eks-cluster-quickstart/scripts/web-deployment-service.yaml
 ```
