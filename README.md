@@ -27,7 +27,7 @@ Use AWS Console to configure the EC2 Instance for kubectl.  This is a step by st
 Click on "Launch Instance"  
 Click on "Quick Start"  
 ```
-Amazon Linux 2 AMI (HVM), SSD Volume Type - ami-0c6b1d09930fac512 
+Amazon Linux 2 AMI (HVM), SSD Volume Type 
 ```  
 Click on "Select"
 
@@ -202,8 +202,12 @@ script to fail.
 ### AWS CloudFormation
 Delete "eks-cluster-demo" Stack  
 
-### AWS EC2
-Delete "kubectl-console" Instance  
+### AWS EC2 Dashboard
+#### Instances
+Terminate "kubectl-console" Instance  
+
+#### Security Groups
+Delete Security Group "launch-wizard-1"
 
 ## References
 Getting Started with Amazon EKS  
