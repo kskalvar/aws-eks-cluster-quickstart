@@ -10,7 +10,7 @@ Steps:
 * [Configure Your AWS EC2 Instance](#configure-your-aws-ec2-instance)  
 * [Configure kubectl on Your EC2 Instance](#configure-kubectl-on-your-ec2-instance)  
 * [Deploy WebApp to Your Cluster](#deploy-webapp-to-your-cluster)  
-* [Configure the Kubernetes Dashboard](#configure-the-kubernetes-dashboard-optional)  
+* [Configure the Kubernetes Dashboard (Optional)](#configure-the-kubernetes-dashboard-optional)  
 * [Remove Your AWS EKS Cluster](#remove-your-aws-eks-cluster)  
 
 
