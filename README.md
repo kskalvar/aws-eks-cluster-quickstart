@@ -6,7 +6,7 @@ This solution shows how to create an AWS EKS Cluster and deploy a simple web app
 Note:  This how-to assumes you are creating the eks cluster in us-east-1, you have access to your AWS Root Account, you know how to create an EC2 Instance, and you can login to the instance from your laptop.
 
 Steps:  
-* [Create AWS EKS Cluster using AWS CloudFormation](t#create-aws-eks-cluster-using-aws-cloudformation)  
+* [Create AWS EKS Cluster using AWS CloudFormation](#create-aws-eks-cluster-using-aws-cloudformation)  
 * [Configure Your AWS EC2 Instance](#configure-your-aws-ec2-instance)  
 * [Configure kubectl on Your EC2 Instance](#configure-kubectl-on-your-ec2-instance)  
 * [Deploy WebApp to Your Cluster](#deploy-webapp-to-your-cluster)  
