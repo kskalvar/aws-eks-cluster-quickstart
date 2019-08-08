@@ -3,23 +3,46 @@ AWS Elastic Kubernetes Service (EKS) QuickStart
 
 This solution shows how to create an AWS EKS Cluster and deploy a simple web application with an external Load Balancer. This readme updates an article "Getting Started with Amazon EKS" referenced below and provides a more basic step by step process.  Unfortunately this is a pretty manual effort right now.
 
-Note:  This how-to assumes you are creating the eks cluster in us-east-1, you have access to your AWS Root Account, you know how to create an EC2 Instance, and can login to the instance from your laptop.
+Note:  This how-to assumes you are creating the eks cluster in us-east-1, you have access to your AWS Root Account, you know how to create an EC2 Instance, and you can login to the instance from your laptop.
 
 Steps:  
-
-  Configure Your AWS EC2 Instance  
-  Create AWS EKS Cluster using AWS CloudFormation  
-  Configure kubectl on Your EC2 Instance   
-  Deploy WebApp to Your Cluster  
-  Configure the Kubernetes Dashboard (optional)
-  Remove Your AWS EKS Cluster  
+* [Create AWS EKS Cluster using AWS CloudFormation](t#create-aws-eks-cluster-using-aws-cloudformation)  
+* [Configure Your AWS EC2 Instance](#configure-your-aws-ec2-instance)  
+* [Configure kubectl on Your EC2 Instance](#configure-kubectl-on-your-ec2-instance)  
+* [Deploy WebApp to Your Cluster](#deploy-webapp-to-your-cluster)  
+* [Configure the Kubernetes Dashboard](#configure-the-kubernetes-dashboard-optional)  
+* [Remove Your AWS EKS Cluster](#remove-your-aws-eks-cluster)  
 
 
 To make this first microservice easy to deploy we'll use a docker image located in DockerHub at kskalvar/web.  This image is nothing more than a simple webapp that returns the current ip address of the container it's running in.  We'll create an external AWS Load Balancer and you should see a unique ip address as it is load balanced across containers.
 
 The project also includes the Dockerfile for those interested in the configuration of the actual application or to build your own and deploy using ECR.
 
+## Create AWS EKS Cluster using AWS CloudFormation 
+Use the AWS Console to configure the EKS Cluster.  This is a step by step process.
 
+### AWS CloudFormation Dashboard
+Click on "Create Stack"  
+Select "Specify an Amazon S3 template URL"  
+```
+https://998551034662-aws-eks-cluster.s3.amazonaws.com/eks-cluster-demo.json
+```
+Click on "Next"  
+
+Specify Details
+```
+Stack name: eks-cluster-demo
+KeyName: <Your AWS KeyName>
+```
+Click on "Next"  
+Click on "Next"  
+```
+Select "I acknowledge that AWS CloudFormation might create IAM resources with custom names"  
+Select "I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND"  
+```
+Click on "Create"  
+
+Wait for Status CREATE_COMPLETE before proceeding  
 ## Configure Your AWS EC2 Instance
 Use AWS Console to configure the EC2 Instance for kubectl.  This is a step by step process.
 
@@ -56,32 +79,6 @@ Click on "Launch"
 ```
 Note:  Be sure select an "Choose an existing key pair" or "Create a new key pair"
 ```
-
-## Create AWS EKS Cluster using AWS CloudFormation 
-Use the AWS Console to configure the EKS Cluster.  This is a step by step process.
-
-### AWS CloudFormation Dashboard
-Click on "Create Stack"  
-Select "Specify an Amazon S3 template URL"  
-```
-https://998551034662-aws-eks-cluster.s3.amazonaws.com/eks-cluster-demo.json
-```
-Click on "Next"  
-
-Specify Details
-```
-Stack name: eks-cluster-demo
-KeyName: <Your AWS KeyName>
-```
-Click on "Next"  
-Click on "Next"  
-```
-Select "I acknowledge that AWS CloudFormation might create IAM resources with custom names"  
-Select "I acknowledge that AWS CloudFormation might require the following capability: CAPABILITY_AUTO_EXPAND"  
-```
-Click on "Create"  
-
-Wait for Status CREATE_COMPLETE before proceeding  
 
 ## Configure kubectl on Your EC2 Instance
 You will need to ssh into the AWS EC2 Instance you created above.  This is a step by step process.  
