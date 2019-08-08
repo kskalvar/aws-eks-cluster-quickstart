@@ -193,9 +193,11 @@ http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-da
 ```
 
 ## Remove Your AWS EKS Cluster
-Before proceeding be sure you delete deployment,service web as instructed above.  Failure to do so will cause cloudformation
+Using the AWS Console to delete all resources used by the AWS EKS Cluster
+```
+Note: Before proceeding be sure you delete deployment,service web as instructed above.  Failure to do so will cause cloudformation
 script to fail.
-
+```
 ### AWS CloudFormation
 Delete "eks-cluster-demo" Stack  
 
