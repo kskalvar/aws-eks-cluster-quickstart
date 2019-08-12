@@ -1,7 +1,8 @@
 AWS Elastic Kubernetes Service (EKS) QuickStart  
 ===============================================
 
-This solution shows how to create an AWS EKS Cluster and deploy a simple web application with an external Load Balancer. This readme updates an article "Getting Started with Amazon EKS" referenced below and provides a more basic step by step process.  Unfortunately this is a pretty manual effort right now.
+This solution shows how to create an AWS EKS Cluster and deploy a simple web application with an external Load Balancer. This readme updates an article "Getting Started with Amazon EKS" referenced below and provides a more basic step by step process.  It uses CloudFormation and cloud-init scripts we
+created to do more of the heavy lifting required to setup the cluster.  
 
 Note:  This how-to assumes you are creating the eks cluster in us-east-1, you have access to your AWS Root Account, you know how to create an EC2 Instance, and you can login to the instance from your laptop.
 
@@ -209,8 +210,14 @@ Terminate "kubectl-console" Instance
 Delete Security Group "launch-wizard-1"
 
 ## References
-Getting Started with Amazon EKS  
-https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html  
+AWS EKS QuickStart  
+https://github.com/kskalvar/aws-eks-cluster-quickstart  
 
-Amazon EKS-Optimized AMI  
-https://docs.aws.amazon.com/eks/latest/userguide/eks-optimized-ami.html
+AWS Summit Slides for EKS  
+https://www.slideshare.net/AmazonWebServices/srv318-running-kubernetes-with-amazon-eks  
+
+Kubernetes  
+https://kubernetes.io  
+
+AWS EKS Getting Started  
+https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html  
