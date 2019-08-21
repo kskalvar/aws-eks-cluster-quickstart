@@ -3,10 +3,10 @@ AWS Elastic Kubernetes Service (EKS) QuickStart
 Abstract:
 ```
 Although AWS EKS has been in GA for quite a while, and AWS EKS Fargate on the roadmap but not available yet,
-it still requires a fair amount of manual effort to create the worker nodes and configure kubectl to talk to the
-cluster.  In this QuickStart will build on CloudFormation scripts AWS has already provided to fully automate
-the creation of the EKS Cluster.  We'll also use cloud-init and some basic shell scripts to configure an EC2 instance
-with kubectl and configure it to talk to the cluster.  
+it still requires a fair amount of manual effort to create the worker nodes and configure kubectl to talk to
+the cluster.  In this QuickStart will build on CloudFormation scripts AWS has already provided to fully
+automate the creation of the EKS Cluster.  We'll also use cloud-init and some basic shell scripts to configure
+an EC2 instance with kubectl and configure it to talk to the cluster.  
 ```
 This solution shows how to create an AWS EKS Cluster and deploy a simple web application with an external Load Balancer. This readme updates an article "Getting Started with Amazon EKS" referenced below and provides a more basic step by step process.  It uses CloudFormation and cloud-init scripts we
 created to do more of the heavy lifting required to setup the cluster.  
