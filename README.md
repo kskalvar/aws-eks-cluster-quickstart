@@ -101,8 +101,9 @@ ssh -i <AWS EC2 Private Key> ec2-user@<AWS EC2 Instance IP Address>
 See contents of "/tmp/install-eks-support" it should say "installation complete".
 
 ### Configure AWS CLI
-aws configure
+Use the AWS CLI to set Access Key, Secret Key, and Region Name
 ```
+aws configure
 AWS Access Key ID []: <Your Access Key ID>
 AWS Secret Access Key []: <Your Secret Access Key>
 Default region name []: us-east-1
