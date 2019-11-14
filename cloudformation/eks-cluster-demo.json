@@ -8,7 +8,6 @@
 			"Type": "String",
 			"Default": "eks-cluster"
 		},
-
 		"ServiceRole": 
 		{
 			"Type": "String",
@@ -188,6 +187,32 @@
 			"Description": "Unique identifier for the Node Group.",
 			"Type": "String",
 			"Default": "eks-nodegroup"
+		},
+
+		"ConsoleInstanceType": 
+		{
+			"Description": "Kubectl Console EC2 Instance Type",
+			"Type": "String",
+			"Default": "t2.micro",
+			"AllowedValues": 
+			[
+				"t2.micro",
+				"m1.small"
+			]
+		},
+
+		"ConsoleImageId": 
+		{
+			"Description": "Kubectl Console AMI",
+			"Type": "AWS::EC2::Image::Id",
+			"Default": "ami-0910816f13c1c6cfd"
+		},
+
+		"ConsoleTags": 
+		{
+			"Description": "Kubectl Console Tags",
+			"Type": "String",
+			"Default": "kubectl-console"
 		}
 	},
 
@@ -371,6 +396,38 @@
 			},
 
 			"DependsOn": "EKSCluster"
+		},
+
+		"EKSConsole": 
+		{
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": 
+			{
+				"TemplateURL": "https://s3.amazonaws.com/998551034662-aws-eks-cluster/eks-cluster-console.json",
+				"TimeoutInMinutes": "60",
+				"Parameters": 
+				{
+					"ConsoleInstanceType": 
+					{
+						"Ref": "ConsoleInstanceType"
+					},
+
+					"ConsoleImageId": 
+					{
+						"Ref": "ConsoleImageId"
+					},
+
+					"KeyName": 
+					{
+						"Ref": "KeyName"
+					},
+
+					"ConsoleTags": 
+					{
+						"Ref": "ConsoleTags"
+					}
+				}
+			}
 		}
 	}
 }

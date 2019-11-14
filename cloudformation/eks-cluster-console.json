@@ -1,0 +1,65 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "Amazon EKS - Kubectl Console Instance",
+	"Parameters": 
+	{
+		"ConsoleInstanceType": 
+		{
+			"Description": "Kubectl Console EC2 Instance Type",
+			"Type": "String",
+			"Default": "t2.micro",
+			"AllowedValues": 
+			[
+				"t2.micro",
+				"m1.small"
+			]
+		},
+		"ConsoleImageId": 
+		{
+		    "Description": "Kubectl Console AMI",
+			"Type": "AWS::EC2::Image::Id",
+			"Default": "ami-0910816f13c1c6cfd"
+		},
+		"KeyName": 
+		{
+			"Description": "The EC2 Key Pair to allow SSH access to Kubectl Console",
+			"Type": "AWS::EC2::KeyPair::KeyName"
+		},
+
+		"ConsoleTags": 
+		{
+			"Description": "Kubectl Console Tags",
+			"Type": "String",
+			"Default": "kubectl-console"
+		}
+	},
+
+	"Resources": 
+	{
+		"ConsoleEc2Instance": 
+		{
+			"Type": "AWS::EC2::Instance",
+			"Properties": 
+			{
+				"ImageId": {"Ref": "ConsoleImageId"},
+				"KeyName": {"Ref": "KeyName"},
+				"InstanceType": {"Ref": "ConsoleInstanceType"},
+				"Tags": [{"Key": "Name", "Value": {"Ref": "ConsoleTags"}}]
+			}
+		}
+	},
+    "Outputs": {
+        "ConsolePublicDNS": {
+            "Description": "Kubectl Console Public DNS (IPv4)",
+            "Value": {
+                "Fn::GetAtt": [
+                    "ConsoleEc2Instance",
+                    "PublicDnsName"
+                ]
+            },
+            "Export": {
+                "Name": "eks-cluster-kubectl-console-public-dns"
+            }
+        }
+    }
+}
