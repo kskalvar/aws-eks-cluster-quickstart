@@ -205,7 +205,7 @@
 		{
 			"Description": "Kubectl Console AMI",
 			"Type": "AWS::EC2::Image::Id",
-			"Default": "ami-0910816f13c1c6cfd"
+			"Default": "ami-09a8bd5c6d651156c"
 		},
 
 		"ConsoleTags": 
