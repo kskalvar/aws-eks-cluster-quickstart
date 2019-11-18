@@ -5,17 +5,16 @@ Abstract:
 Although AWS EKS has been in GA for quite a while, and AWS EKS Fargate on the roadmap but not available yet,
 it still requires a fair amount of manual effort to create the worker nodes and configure kubectl to talk to
 the cluster.  In this QuickStart will build on CloudFormation scripts AWS has already provided to fully
-automate the creation of the EKS Cluster.  We'll also use cloud-init and some basic shell scripts to configure
-an EC2 instance with kubectl and configure it to talk to the cluster.  
+automate the creation of the EKS Cluster.  We'll also use some basic shell scripts to configure kubectl on the  
+EC2 Instance to talk to the cluster.  
 ```
 This solution shows how to create an AWS EKS Cluster and deploy a simple web application with an external Load Balancer. This readme updates an article "Getting Started with Amazon EKS" referenced below and provides a more basic step by step process.  It uses CloudFormation and cloud-init scripts we
 created to do more of the heavy lifting required to setup the cluster.  
 
-Note:  This how-to assumes you are creating the eks cluster in us-east-1, you have access to your AWS Root Account, you know how to create an EC2 Instance, and you can login to the instance from your laptop.
+Note:  This how-to assumes you are creating the eks cluster in us-east-1, you have access to your AWS Root Account, and you can login to an EC2 Instance remotely.
 
 Steps:  
-* [Create AWS EKS Cluster using AWS CloudFormation](#create-aws-eks-cluster-using-aws-cloudformation)  
-* [Configure Your AWS EC2 Instance](#configure-your-aws-ec2-instance)  
+* [Create AWS EKS Cluster and EC2 Instance for Kubectl Console using AWS CloudFormation](#create-aws-eks-cluster-and-ec2-instance-for-kubectl-console-using-aws-cloudformation)  
 * [Configure kubectl on Your EC2 Instance](#configure-kubectl-on-your-ec2-instance)  
 * [Deploy WebApp to Your Cluster](#deploy-webapp-to-your-cluster)  
 * [Configure the Kubernetes Dashboard (Optional)](#configure-the-kubernetes-dashboard-optional)  
@@ -26,8 +25,9 @@ To make this first microservice easy to deploy we'll use a docker image located 
 
 The project also includes the Dockerfile for those interested in the configuration of the actual application or to build your own and deploy using ECR.
 
-## Create AWS EKS Cluster using AWS CloudFormation 
-Use the AWS Console to configure the EKS Cluster.  This is a step by step process.
+## Create AWS EKS Cluster and EC2 Instance for Kubectl Console using AWS CloudFormation 
+We'll use CloudFormation to create the EKS Cluster, Worker Nodes, and EC2 Instance in which to run
+kubectl.  This is a step by step process.
 
 ### AWS CloudFormation Dashboard
 Click on "Create Stack"  
@@ -51,45 +51,16 @@ Select "I acknowledge that AWS CloudFormation might require the following capabi
 Click on "Create"  
 
 Wait for Status CREATE_COMPLETE before proceeding  
-## Configure Your AWS EC2 Instance
-Use AWS Console to configure the EC2 Instance for kubectl.  This is a step by step process.
 
-### AWS EC2 Dashboard  
-Click on "Launch Instance"  
-Click on "Quick Start"  
-```
-Amazon Linux 2 AMI (HVM), SSD Volume Type 
-```  
-Click on "Select"
-
-Choose Instance Type
-```
-t2.micro
-```
-Click on "Next: Configure Instance Details"  
-Expand Advanced Details
-```
-User data
-Select "As text"
-Cut and Paste contents of file from "aws-eks-cluster-quickstart/cloud-init/cloud-init" in github 
-```  
-Click on "Next: Add Storage"  
-Click on "Next" Add Tags"  
-Click on "Add Tag"
-```
-Key: Name
-Value: kubectl-console
-```
-Click on "Next: Configure Security Group"  
-
-Click on "Review and Launch"    
-Click on "Launch"  
-```
-Note:  Be sure select an "Choose an existing key pair" or "Create a new key pair"
-```
 
 ## Configure kubectl on Your EC2 Instance
-You will need to ssh into the AWS EC2 Instance you created above.  This is a step by step process.  
+You will need to ssh into the AWS EC2 Instance you created above.  This is a step by step process.
+```
+NOTE:  The EC2 Instance used for kubectl was created by CloudFomration references an image
+       we previouly created using the cloud-init script in this project.  The image can be found
+       under Images/AMIs from the EC2 Dashboard once you create it.  Simply update the default
+       ConsoleImageId in CloudFormation form when creeating the eks cluster.
+```
 
 ### Connect to EC2 Instance
 Using ssh from your local machine, connect to your AWS EC2 Instance
@@ -129,13 +100,11 @@ NOTE:  There is a script in /home/ec2-user called "configure-kube-control".
 ### Test Cluster
 Using kubectl test the cluster status
 ```
-source ~/.bashrc # To insure you picked up the environment variables
 kubectl get svc 
 ```
 ### Test Cluster Nodes
 Use kubectl to test status of cluster nodes
 ```
-source ~/.bashrc # To insure you picked up the environment variables
 kubectl get nodes
 ```
 Wait till you see all nodes appear in "STATUS Ready"
