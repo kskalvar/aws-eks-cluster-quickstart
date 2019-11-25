@@ -27,7 +27,7 @@
 			"Properties": 
 			{
 				"Name": {"Ref": "ClusterName"},
-				"Version": "1.11", 
+				"Version": "1.12", 
 				"RoleArn": { "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:role/${ServiceRole}"},
 				"ResourcesVpcConfig": {
 					"SecurityGroupIds": [{"Ref": "ControlPlaneSecurityGroup"}],
