@@ -8,6 +8,7 @@
 			"Type": "String",
 			"Default": "eks-cluster"
 		},
+
 		"ServiceRole": 
 		{
 			"Type": "String",
@@ -205,7 +206,12 @@
 		{
 			"Description": "Kubectl Console AMI",
 			"Type": "AWS::EC2::Image::Id",
-			"Default": "ami-09a8bd5c6d651156c"
+			"Default": "ami-09a8bd5c6d651156c",
+			"AllowedValues": 
+			[
+				"ami-09a8bd5c6d651156c",
+				"ami-0449d5c775e682237"
+			]
 		},
 
 		"ConsoleTags": 
