@@ -116,7 +116,7 @@ You will need to ssh into the AWS EC2 Instance you created above. This is a step
 ### Deploy Web App
 Use kubectl to create the web service
 ```
-kubectl apply -f ~/aws-eks-cluster-quickstart/scripts/web-deployment-service.yaml
+kubectl apply -f ~/aws-eks-cluster-quickstart/kube-deployment/web-deployment-service.yaml
 ```
 
 ### Show Pods Running
