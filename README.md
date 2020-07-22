@@ -179,10 +179,6 @@ Note: Before proceeding be sure you delete deployment,service web as instructed 
 ### AWS CloudFormation
 Delete "eks-cluster-demo" Stack  
 
-### AWS EC2 Dashboard
-#### Instances
-Terminate "kubectl-console" Instance  
-
 ## References
 AWS EKS QuickStart  
 https://github.com/kskalvar/aws-eks-cluster-quickstart  
