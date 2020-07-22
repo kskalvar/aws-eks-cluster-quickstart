@@ -209,8 +209,7 @@
 			"Default": "ami-09a8bd5c6d651156c",
 			"AllowedValues": 
 			[
-				"ami-09a8bd5c6d651156c",
-				"ami-0449d5c775e682237"
+				"ami-0d70c53588fb26913"
 			]
 		},
 
