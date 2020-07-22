@@ -141,7 +141,7 @@ http://<EXTERNAL-IP>
 ### Delete Deployment, Service
 Use kubectl to delete application
 ```
-kubectl delete -f ~/aws-eks-cluster-quickstart/scripts/web-deployment-service.yaml
+kubectl delete -f ~/aws-eks-cluster-quickstart/kube-deployment/web-deployment-service.yaml
 ```
 
 ## Configure the Kubernetes Dashboard (optional)
