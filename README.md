@@ -183,9 +183,6 @@ Delete "eks-cluster-demo" Stack
 #### Instances
 Terminate "kubectl-console" Instance  
 
-#### Security Groups
-Delete Security Group "launch-wizard-1"
-
 ## References
 AWS EKS QuickStart  
 https://github.com/kskalvar/aws-eks-cluster-quickstart  
